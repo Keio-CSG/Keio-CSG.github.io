@@ -1,0 +1,178 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ThemeIcon from "../../components/ThemeIcon.astro";
+import { site } from "../../data/site";
+import { researchThemes } from "../../data/research";
+import { news } from "../../data/news";
+import { publications } from "../../data/publications";
+import { locales, t, type Locale } from "../../i18n/strings";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const s = t(locale);
+const ja = locale === "ja";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (p: string) => `${base}/${locale}${p}`;
+
+const latestNews = news.slice(0, 6);
+const venueHighlights = ["ISSCC", "NDSS", "CVPR", "ICCV", "IROS", "ICRA", "ICCAD", "JSSC"];
+const stats = [
+  { value: "50+", label: ja ? "発表論文" : "Publications" },
+  { value: "30+", label: ja ? "特許出願・登録" : "Patents" },
+  { value: "9", label: ja ? "JSSC 論文" : "JSSC papers" },
+  { value: "5", label: ja ? "ISSCC 論文" : "ISSCC papers" },
+];
+
+const description = ja
+  ? "慶應義塾大学 吉岡研究室 (Computing and Sensing Group)。エッジコンピューティング、自動運転セキュリティ、LiDAR 3Dセンシングの研究を通じ、世界を変革する技術に取り組んでいます。"
+  : "Computing and Sensing Group at Keio University. We pursue world-changing research in edge computing, autonomous driving security, and LiDAR 3D sensing.";
+---
+
+<Layout locale={locale} path="" title="Home" description={description}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-white/5">
+    <div class="grid-backdrop absolute inset-0"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.16),transparent_60%)]"></div>
+    <div class="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-accent-400/10 to-transparent animate-sweep"></div>
+
+    <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
+      <p class="animate-rise inline-flex items-center gap-2 rounded-full border border-accent-400/25 bg-accent-400/5 px-3.5 py-1.5 text-xs font-medium tracking-wide text-accent-400">
+        <span class="h-1.5 w-1.5 rounded-full bg-accent-400"></span>
+        {ja ? "慶應義塾大学 理工学部 吉岡研究室" : "Yoshioka Lab · Keio University"}
+      </p>
+
+      <h1 class="animate-rise mt-7 max-w-4xl text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl">
+        {ja ? (
+          <>最先端の<span class="bg-gradient-to-r from-accent-400 to-signal-400 bg-clip-text text-transparent">回路とセンシング</span>で、<br class="hidden sm:block" />世界を変革する。</>
+        ) : (
+          <>Transforming the world with <span class="bg-gradient-to-r from-accent-400 to-signal-400 bg-clip-text text-transparent">circuits and sensing</span>.</>
+        )}
+      </h1>
+
+      <p class="animate-rise mt-7 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
+        {ja
+          ? "自動運転車、作業用ロボット、遠隔医療など、かつてSF映画の世界だった技術を現実のものにする。Computing and Sensing Group (CSG) は、その最前線で研究に取り組んでいます。"
+          : "Autonomous vehicles, working robots, remote healthcare — technologies once confined to science fiction. The Computing and Sensing Group works at the frontier that makes them real."}
+      </p>
+
+      <div class="animate-rise mt-10 flex flex-wrap gap-3">
+        <a href={href("/research")} class="rounded-lg bg-accent-500 px-5 py-3 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400">
+          {ja ? "研究内容を見る" : "Explore our research"}
+        </a>
+        <a href={href("/recruit")} class="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400/50 hover:text-accent-400">
+          {ja ? "研究室に参加する" : "Join the lab"}
+        </a>
+      </div>
+
+      <dl class="mt-16 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+        {stats.map((stat) => (
+          <div>
+            <dt class="text-3xl font-bold tracking-tight text-accent-400">{stat.value}</dt>
+            <dd class="mt-1 text-xs text-slate-400">{stat.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Venue marquee -->
+  <section class="border-b border-white/5 bg-ink-900/50">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-6">
+      <span class="text-xs font-semibold uppercase tracking-widest text-slate-500">
+        {ja ? "主な発表先" : "Published at"}
+      </span>
+      {venueHighlights.map((v) => (
+        <span class="font-mono text-sm text-slate-400">{v}</span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Research themes -->
+  <section class="mx-auto max-w-6xl px-5 py-24">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">{ja ? "研究分野" : "Research areas"}</h2>
+        <p class="mt-3 max-w-xl text-slate-400">
+          {ja
+            ? "回路からアルゴリズムまで、ハードとソフトを貫く3つの柱で研究を進めています。"
+            : "Three pillars spanning hardware and software, from circuits up to algorithms."}
+        </p>
+      </div>
+      <a href={href("/research")} class="text-sm font-medium text-accent-400 hover:underline">
+        {s.common.viewAll} →
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {researchThemes.map((theme) => (
+        <a
+          href={`${href("/research")}#${theme.slug}`}
+          class="group relative overflow-hidden rounded-2xl border border-white/8 bg-ink-850 p-7 transition-all hover:border-accent-400/30 hover:bg-ink-800"
+        >
+          <div class="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-500/5 blur-2xl transition-opacity group-hover:bg-accent-500/10"></div>
+          <div class="relative">
+            <span class="grid h-11 w-11 place-items-center rounded-xl border border-accent-400/20 bg-accent-400/5 text-accent-400">
+              <ThemeIcon name={theme.icon} />
+            </span>
+            <h3 class="mt-5 text-lg font-semibold tracking-tight">{ja ? theme.title.ja : theme.title.en}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400 line-clamp-5">
+              {ja ? theme.summary.ja : theme.summary.en}
+            </p>
+            <span class="mt-5 inline-block text-sm font-medium text-accent-400 opacity-0 transition-opacity group-hover:opacity-100">
+              {s.common.readMore} →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="border-y border-white/5 bg-ink-900/40">
+    <div class="mx-auto max-w-6xl px-5 py-24">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">News</h2>
+        <a href={href("/news")} class="text-sm font-medium text-accent-400 hover:underline">{s.common.viewAll} →</a>
+      </div>
+
+      <ul class="mt-12 divide-y divide-white/5 border-y border-white/5">
+        {latestNews.map((item) => (
+          <li class="group flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:gap-8">
+            <time class="shrink-0 font-mono text-xs text-slate-500">{item.date}</time>
+            <p class="text-sm leading-relaxed text-slate-300 transition-colors group-hover:text-white">
+              {ja ? item.ja : item.en}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Recruit CTA -->
+  <section class="mx-auto max-w-6xl px-5 py-24">
+    <div class="glow-ring relative overflow-hidden rounded-3xl border border-accent-400/15 bg-gradient-to-br from-ink-850 to-ink-900 p-10 md:p-14">
+      <div class="grid-backdrop absolute inset-0 opacity-40"></div>
+      <div class="relative max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
+          {ja ? "慶應から、世界へ。" : "From Keio to the world."}
+        </h2>
+        <p class="mt-5 leading-relaxed text-slate-300">
+          {ja
+            ? "学部3年生の研究室見学は大歓迎です。博士課程の学生、ポスドク、そして企業との共同研究も募集しています。まずは気軽にメールをください。"
+            : "We welcome lab visits from undergraduates, and we're recruiting Ph.D. students, post-docs, and industry collaborations. Feel free to reach out."}
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href={`mailto:${site.email}`} class="rounded-lg bg-accent-500 px-5 py-3 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400">
+            {site.email}
+          </a>
+          <a href={href("/recruit")} class="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400/50 hover:text-accent-400">
+            {ja ? "B3学生へのメッセージ" : "For prospective students"}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

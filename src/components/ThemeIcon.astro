@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  class?: string;
+}
+const { name, class: className = "h-6 w-6" } = Astro.props;
+---
+
+{name === "cpu" && (
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+    <rect x="7" y="7" width="10" height="10" rx="1.5" />
+    <rect x="10.5" y="10.5" width="3" height="3" rx="0.5" />
+    <path d="M10 7V3.5M14 7V3.5M10 20.5V17M14 20.5V17M7 10H3.5M7 14H3.5M20.5 10H17M20.5 14H17" />
+  </svg>
+)}
+
+{name === "shield" && (
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.8 4.5 5.8v6c0 4.4 3.1 8.2 7.5 9.4 4.4-1.2 7.5-5 7.5-9.4v-6z" />
+    <path d="m9 12 2.2 2.2L15.4 10" />
+  </svg>
+)}
+
+{name === "radar" && (
+  <svg class={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+    <circle cx="12" cy="12" r="8.8" />
+    <circle cx="12" cy="12" r="5.4" />
+    <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    <path d="M12 12 19 6.4" />
+  </svg>
+)}

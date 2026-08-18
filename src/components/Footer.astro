@@ -1,0 +1,55 @@
+---
+import { t, type Locale } from "../i18n/strings";
+import { site } from "../data/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const s = t(locale);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (p: string) => `${base}/${locale}${p}`;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5 bg-ink-900">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-accent-500 to-signal-500 text-[13px] font-bold text-ink-950">CS</span>
+        <span class="font-semibold tracking-tight">Keio <span class="text-accent-400">CSG</span></span>
+      </div>
+      <p class="mt-4 text-sm leading-relaxed text-slate-400">
+        {locale === "ja" ? site.affiliation.ja : site.affiliation.en}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">{s.footer.address}</h2>
+      <address class="mt-4 space-y-1 text-sm not-italic leading-relaxed text-slate-400">
+        <p>{site.address.postal}</p>
+        <p>{locale === "ja" ? site.address.ja : site.address.en}</p>
+        <p class="pt-2 text-slate-500">Students: {site.rooms.students}</p>
+        <p class="text-slate-500">PI: {site.rooms.pi}</p>
+      </address>
+      <a href={site.mapUrl} target="_blank" rel="noopener" class="mt-3 inline-block text-sm text-accent-400 hover:underline">
+        {locale === "ja" ? "矢上キャンパスへのアクセス →" : "Access to Yagami Campus →"}
+      </a>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-500">{s.footer.contact}</h2>
+      <div class="mt-4 space-y-2 text-sm">
+        <a href={`mailto:${site.email}`} class="block text-accent-400 hover:underline">{site.email}</a>
+        <a href={site.socials.github} target="_blank" rel="noopener" class="block text-slate-400 hover:text-white">GitHub</a>
+        <a href={site.socials.kaggle} target="_blank" rel="noopener" class="block text-slate-400 hover:text-white">Kaggle</a>
+        <a href={href("/recruit")} class="block text-slate-400 hover:text-white">{s.nav.recruit}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/5 px-5 py-6">
+    <p class="mx-auto max-w-6xl text-xs text-slate-500">© {year} {s.footer.rights}</p>
+  </div>
+</footer>
