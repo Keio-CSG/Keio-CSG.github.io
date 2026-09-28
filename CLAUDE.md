@@ -3,8 +3,8 @@
 慶應義塾大学 理工学部 吉岡研究室 (Computing and Sensing Group) の研究室サイト。
 旧 Google Sites 版 (https://sites.google.com/keio.jp/keio-csg/) の内容を保持しつつ刷新したもの。
 
-- 公開URL: **https://kentaroy47.github.io/lab-hp/**
-- リポジトリ: https://github.com/kentaroy47/lab-hp
+- 公開URL: **https://keio-csg.github.io/**
+- リポジトリ: https://github.com/Keio-CSG/Keio-CSG.github.io（組織サイト用の特別名。この名前だからルート直下で配信される）
 - 作業ディレクトリ: `C:\Users\kyosh\OneDrive\Documents\Codes\lab-hp`
 
 ---
@@ -218,7 +218,7 @@ B3・新M1 の獲得を意識して、実績の羅列ではなく「ここに来
 
 日英バイリンガル。`prefixDefaultLocale: true` なので日本語も `/ja` 配下に出る。
 
-- `/lab-hp/ja/...`（既定）と `/lab-hp/en/...`
+- `/ja/...`（既定）と `/en/...`
 - ページは `src/pages/[locale]/*.astro`。各ページの `getStaticPaths()` が `locales` を回す
 - `src/pages/index.astro` はルートから `/ja` への meta refresh リダイレクト
 - ヘッダーの言語切替は**現在のページの対応する言語版**にリンクする（`Layout` に渡す `path` を使う）
@@ -303,7 +303,7 @@ figs/                 イラスト原本（サイトからは直接参照しな�
 
 **GitHub Pages 側の設定は「Source: GitHub Actions」であること。**
 「Deploy from a branch」になっていると Jekyll がビルドしようとして失敗する（実際に一度踏んだ）。
-設定場所: https://github.com/kentaroy47/lab-hp/settings/pages
+設定場所: https://github.com/Keio-CSG/Keio-CSG.github.io/settings/pages
 
 ### 独自ドメインへの移行
 
@@ -330,7 +330,7 @@ JSON-LD を出力している。ページを追加しても自動で付く。
 3. Google Scholar・researchmap・学内ディレクトリなど外部からの参照 URL を更新
 4. 順位が安定するまで旧サイトは消さない
 
-現状は `kentaroy47.github.io` ドメインなので、SEO 上は `keio.jp` 配下のカスタムドメインに
+現状は `keio-csg.github.io` ドメインなので、SEO 上は `keio.jp` 配下のカスタムドメインに
 移した方が有利。
 
 ---

@@ -3,10 +3,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-// Update `site`/`base` when the lab moves to a custom domain (e.g. https://csg.keio.jp with base '/').
+// Org site repo (Keio-CSG.github.io), so the site is served at the domain root.
+// For a custom domain (e.g. https://csg.keio.jp) change `site` and add public/CNAME.
 export default defineConfig({
-  site: 'https://kentaroy47.github.io',
-  base: '/lab-hp',
+  site: 'https://keio-csg.github.io',
+  base: '/',
   i18n: {
     locales: ['ja', 'en'],
     defaultLocale: 'ja',
