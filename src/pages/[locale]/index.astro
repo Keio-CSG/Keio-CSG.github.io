@@ -1,178 +1,42 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ThemeIcon from "../../components/ThemeIcon.astro";
-import { site } from "../../data/site";
+import edgeIllustration from "../../../figs/edge.webp";
+import mascot from "../../../figs/health.webp";
+import mainVisual from "../../../figs/main.webp";
 import { researchThemes } from "../../data/research";
 import { news } from "../../data/news";
-import { publications } from "../../data/publications";
-import { locales, t, type Locale } from "../../i18n/strings";
-
-export function getStaticPaths() {
-  return locales.map((locale) => ({ params: { locale } }));
-}
-
+import { projects } from "../../data/projects";
+import { locales, type Locale } from "../../i18n/strings";
+export function getStaticPaths() { return locales.map(locale => ({ params: { locale } })); }
 const locale = Astro.params.locale as Locale;
-const s = t(locale);
 const ja = locale === "ja";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const href = (p: string) => `${base}/${locale}${p}`;
-
-const latestNews = news.slice(0, 6);
-const venueHighlights = ["ISSCC", "NDSS", "CVPR", "ICCV", "IROS", "ICRA", "ICCAD", "JSSC"];
-const stats = [
-  { value: "50+", label: ja ? "発表論文" : "Publications" },
-  { value: "30+", label: ja ? "特許出願・登録" : "Patents" },
-  { value: "9", label: ja ? "JSSC 論文" : "JSSC papers" },
-  { value: "5", label: ja ? "ISSCC 論文" : "ISSCC papers" },
-];
-
-const description = ja
-  ? "慶應義塾大学 吉岡研究室 (Computing and Sensing Group)。エッジコンピューティング、自動運転セキュリティ、LiDAR 3Dセンシングの研究を通じ、世界を変革する技術に取り組んでいます。"
-  : "Computing and Sensing Group at Keio University. We pursue world-changing research in edge computing, autonomous driving security, and LiDAR 3D sensing.";
+const href = (path: string) => `${base}/${locale}${path}`;
+const description = ja ? "慶應義塾大学 吉岡研究室。回路、AI、LiDARセンシング、セキュリティを横断し、未来のコンピューティングとセンシングをつくる。" : "Computing and Sensing Group at Keio University. Exploring circuits, AI, LiDAR sensing and security to build what comes next.";
+const areaLabels = ["Beyond digital limits.", "Trust in every signal.", "A new dimension of sensing."];
+const areaSummaries = ja ? ["アナログ回路とAIの融合で、計算の限界を超える。超低消費電力な次世代コンピューティングへ。", "センサーの脆弱性を解き明かし、自動運転の信頼性を高める。現実世界で機能するセキュリティへ。", "光で世界を捉え、見えなかった情報を引き出す。モビリティからスポーツ、医療まで。"] : ["Bringing analog circuits and AI together to push the limits of energy-efficient computing.", "Uncovering sensor vulnerabilities and building trustworthy autonomous systems for the real world.", "Capturing the world through light. From mobility to sports and healthcare, sensing new possibilities."];
 ---
-
 <Layout locale={locale} path="" title="Home" description={description}>
-  <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-white/5">
-    <div class="grid-backdrop absolute inset-0"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.16),transparent_60%)]"></div>
-    <div class="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-accent-400/10 to-transparent animate-sweep"></div>
-
-    <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
-      <p class="animate-rise inline-flex items-center gap-2 rounded-full border border-accent-400/25 bg-accent-400/5 px-3.5 py-1.5 text-xs font-medium tracking-wide text-accent-400">
-        <span class="h-1.5 w-1.5 rounded-full bg-accent-400"></span>
-        {ja ? "慶應義塾大学 理工学部 吉岡研究室" : "Yoshioka Lab · Keio University"}
-      </p>
-
-      <h1 class="animate-rise mt-7 max-w-4xl text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl">
-        {ja ? (
-          <>最先端の<span class="bg-gradient-to-r from-accent-400 to-signal-400 bg-clip-text text-transparent">回路とセンシング</span>で、<br class="hidden sm:block" />世界を変革する。</>
-        ) : (
-          <>Transforming the world with <span class="bg-gradient-to-r from-accent-400 to-signal-400 bg-clip-text text-transparent">circuits and sensing</span>.</>
-        )}
-      </h1>
-
-      <p class="animate-rise mt-7 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
-        {ja
-          ? "自動運転車、作業用ロボット、遠隔医療など、かつてSF映画の世界だった技術を現実のものにする。Computing and Sensing Group (CSG) は、その最前線で研究に取り組んでいます。"
-          : "Autonomous vehicles, working robots, remote healthcare — technologies once confined to science fiction. The Computing and Sensing Group works at the frontier that makes them real."}
-      </p>
-
-      <div class="animate-rise mt-10 flex flex-wrap gap-3">
-        <a href={href("/research")} class="rounded-lg bg-accent-500 px-5 py-3 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400">
-          {ja ? "研究内容を見る" : "Explore our research"}
-        </a>
-        <a href={href("/recruit")} class="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400/50 hover:text-accent-400">
-          {ja ? "研究室に参加する" : "Join the lab"}
-        </a>
+  <section class="hero">
+    <div class="shell hero-inner">
+      <div class="hero-topline"><span class="eyebrow"><span class="status-dot"></span> COMPUTING AND SENSING GROUP</span><span class="mono hero-location">KEIO / YOKOHAMA, JP</span></div>
+      <div class="hero-copy">
+        <p class="hero-affiliation">{ja ? "慶應義塾大学 理工学部 吉岡研究室" : "Yoshioka Laboratory · Keio University"}</p>
+        <h1>Sense beyond.<br /><span>Compute ahead.</span></h1>
+        <h2>{ja ? "まだ見えない未来を、つくる。" : "Make the unseen possible."}</h2>
+        <p class="hero-description">{ja ? <>回路からAIへ、センシングから社会へ。<br />ハードとソフトの境界を越え、<br class="mobile-break" />次の「あたりまえ」を生み出す。</> : <>From circuits to AI. From sensing to society.<br />We cross the boundaries of hardware and software<br />to build what comes next.</>}</p>
+        <div class="hero-buttons"><a class="button button-primary" href={href("/research")}>{ja ? "研究を知る" : "Explore research"}<span aria-hidden="true">↗</span></a><a class="text-link" href={href("/recruit")}>{ja ? "研究室に参加する" : "Join our lab"}<span aria-hidden="true">↗</span></a></div>
       </div>
-
-      <dl class="mt-16 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
-        {stats.map((stat) => (
-          <div>
-            <dt class="text-3xl font-bold tracking-tight text-accent-400">{stat.value}</dt>
-            <dd class="mt-1 text-xs text-slate-400">{stat.label}</dd>
-          </div>
-        ))}
-      </dl>
+      <div class="hero-art"><img src={mainVisual.src} width={mainVisual.width} height={mainVisual.height} alt={ja ? "回路でつながる自動運転、ロボット、医療を描いた研究室のイラスト" : "Lab illustration connecting autonomous vehicles, robots, and healthcare through circuits"} fetchpriority="high" /><div class="art-caption"><span>COMPUTING AND SENSING GROUP</span><span>COMPUTING × SENSING</span></div></div>
+      <div class="hero-bottom"><span>HARDWARE. SOFTWARE. REAL WORLD.</span><a href="#research">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
     </div>
   </section>
-
-  <!-- Venue marquee -->
-  <section class="border-b border-white/5 bg-ink-900/50">
-    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-6">
-      <span class="text-xs font-semibold uppercase tracking-widest text-slate-500">
-        {ja ? "主な発表先" : "Published at"}
-      </span>
-      {venueHighlights.map((v) => (
-        <span class="font-mono text-sm text-slate-400">{v}</span>
-      ))}
-    </div>
+  <section class="venue-strip"><div class="shell venue-inner"><span class="eyebrow">OUR RESEARCH REACHES</span><div>{["ISSCC", "JSSC", "CVPR", "ICCV", "NDSS", "ICRA", "IROS"].map(venue => <span>{venue}</span>)}</div></div></section>
+  <section class="section shell" id="research">
+    <div class="section-heading"><div><p class="eyebrow"><span class="section-number">01 /</span> OUR RESEARCH</p><h2>{ja ? <>境界を越えて、<br />可能性をひらく。</> : <>Across disciplines.<br />Beyond possibilities.</>}</h2></div><div class="section-intro"><p>{ja ? "回路からアルゴリズム、そして実社会へ。3つの研究領域を軸に、コンピューティングとセンシングの未来を探求しています。" : "From circuits and algorithms to real-world impact. Three connected fields, one ambition: to shape the future of computing and sensing."}</p><a class="text-link" href={href("/research")}>{ja ? "研究内容を詳しく" : "Discover our research"}<span aria-hidden="true">↗</span></a></div></div>
+    <div class="research-grid">{researchThemes.map((theme, i) => <a class="research-card" href={`${href("/research")}#${theme.slug}`}><div class="research-card-top"><span class="mono">0{i+1}</span><span class="circle-arrow" aria-hidden="true">↗</span></div><div class="research-art"><img src={(i === 0 ? edgeIllustration : i === 1 ? mainVisual : mascot).src} width={(i === 0 ? edgeIllustration : i === 1 ? mainVisual : mascot).width} height={(i === 0 ? edgeIllustration : i === 1 ? mainVisual : mascot).height} alt="" loading="lazy" class:list={{ "research-scene": i === 1 }} /></div><p class="eyebrow">{areaLabels[i]}</p><h3>{theme.title.en}</h3>{ja && <p class="research-ja">{theme.title.ja}</p>}<p class="research-summary">{areaSummaries[i]}</p></a>)}</div>
   </section>
-
-  <!-- Research themes -->
-  <section class="mx-auto max-w-6xl px-5 py-24">
-    <div class="flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">{ja ? "研究分野" : "Research areas"}</h2>
-        <p class="mt-3 max-w-xl text-slate-400">
-          {ja
-            ? "回路からアルゴリズムまで、ハードとソフトを貫く3つの柱で研究を進めています。"
-            : "Three pillars spanning hardware and software, from circuits up to algorithms."}
-        </p>
-      </div>
-      <a href={href("/research")} class="text-sm font-medium text-accent-400 hover:underline">
-        {s.common.viewAll} →
-      </a>
-    </div>
-
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
-      {researchThemes.map((theme) => (
-        <a
-          href={`${href("/research")}#${theme.slug}`}
-          class="group relative overflow-hidden rounded-2xl border border-white/8 bg-ink-850 p-7 transition-all hover:border-accent-400/30 hover:bg-ink-800"
-        >
-          <div class="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-500/5 blur-2xl transition-opacity group-hover:bg-accent-500/10"></div>
-          <div class="relative">
-            <span class="grid h-11 w-11 place-items-center rounded-xl border border-accent-400/20 bg-accent-400/5 text-accent-400">
-              <ThemeIcon name={theme.icon} />
-            </span>
-            <h3 class="mt-5 text-lg font-semibold tracking-tight">{ja ? theme.title.ja : theme.title.en}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-slate-400 line-clamp-5">
-              {ja ? theme.summary.ja : theme.summary.en}
-            </p>
-            <span class="mt-5 inline-block text-sm font-medium text-accent-400 opacity-0 transition-opacity group-hover:opacity-100">
-              {s.common.readMore} →
-            </span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- News -->
-  <section class="border-y border-white/5 bg-ink-900/40">
-    <div class="mx-auto max-w-6xl px-5 py-24">
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">News</h2>
-        <a href={href("/news")} class="text-sm font-medium text-accent-400 hover:underline">{s.common.viewAll} →</a>
-      </div>
-
-      <ul class="mt-12 divide-y divide-white/5 border-y border-white/5">
-        {latestNews.map((item) => (
-          <li class="group flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:gap-8">
-            <time class="shrink-0 font-mono text-xs text-slate-500">{item.date}</time>
-            <p class="text-sm leading-relaxed text-slate-300 transition-colors group-hover:text-white">
-              {ja ? item.ja : item.en}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <!-- Recruit CTA -->
-  <section class="mx-auto max-w-6xl px-5 py-24">
-    <div class="glow-ring relative overflow-hidden rounded-3xl border border-accent-400/15 bg-gradient-to-br from-ink-850 to-ink-900 p-10 md:p-14">
-      <div class="grid-backdrop absolute inset-0 opacity-40"></div>
-      <div class="relative max-w-2xl">
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">
-          {ja ? "慶應から、世界へ。" : "From Keio to the world."}
-        </h2>
-        <p class="mt-5 leading-relaxed text-slate-300">
-          {ja
-            ? "学部3年生の研究室見学は大歓迎です。博士課程の学生、ポスドク、そして企業との共同研究も募集しています。まずは気軽にメールをください。"
-            : "We welcome lab visits from undergraduates, and we're recruiting Ph.D. students, post-docs, and industry collaborations. Feel free to reach out."}
-        </p>
-        <div class="mt-9 flex flex-wrap gap-3">
-          <a href={`mailto:${site.email}`} class="rounded-lg bg-accent-500 px-5 py-3 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-400">
-            {site.email}
-          </a>
-          <a href={href("/recruit")} class="rounded-lg border border-white/15 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-400/50 hover:text-accent-400">
-            {ja ? "B3学生へのメッセージ" : "For prospective students"}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="news-section"><div class="shell news-layout"><div><p class="eyebrow"><span class="section-number">02 /</span> LATEST UPDATES</p><h2>What’s new.</h2><p class="muted">{ja ? "研究室の、いま。" : "Life and discoveries at CSG."}</p><a class="text-link" href={href("/news")}>{ja ? "すべてのニュース" : "All news"}<span aria-hidden="true">↗</span></a></div><ul class="news-list">{news.slice(0, 4).map(item => <li><div class="news-meta"><time datetime={item.date}>{item.date.replace("-", ".")}</time><span class={`tag tag-${item.tag}`}>{item.tag ?? "lab"}</span></div><p>{item[locale]}</p></li>)}</ul></div></section>
+  <section class="section shell"><div class="section-heading"><div><p class="eyebrow"><span class="section-number">03 /</span> SELECTED PROJECTS</p><h2>Ideas into impact.</h2><p class="muted">{ja ? "問いを、かたちに。" : "Research that moves the world forward."}</p></div><a class="text-link" href={href("/projects")}>{ja ? "すべてのプロジェクト" : "All projects"}<span aria-hidden="true">↗</span></a></div><div class="project-list">{projects.slice(0, 3).map((project, i) => <a class="project-row" href={`${href("/projects")}#${project.slug}`}><span class="mono project-index">0{i+1}</span><div><span class="eyebrow">{project.venue} / {project.year}</span><h3>{project.title}</h3><p>{project.subtitle}</p></div><span class="circle-arrow" aria-hidden="true">↗</span></a>)}</div></section>
+  <section class="join-section"><div class="shell join-inner"><div><p class="eyebrow">THE NEXT DISCOVERY STARTS WITH YOU</p><h2>Stay curious.<br />Build what’s next<span>.</span></h2><p>{ja ? "慶應から、世界へ。次の挑戦を、一緒に。" : "From Keio to the world. Let’s take the next step together."}</p></div><img class="join-mascot" src={mascot.src} width={mascot.width} height={mascot.height} alt={ja ? "研究室のマスコット" : "Our lab mascot"} loading="lazy" /><a class="join-circle" href={href("/recruit")}><span aria-hidden="true">↗</span>JOIN OUR LAB</a></div></section>
 </Layout>

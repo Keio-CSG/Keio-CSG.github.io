@@ -1,0 +1,113 @@
+---
+import mascot from "../../../figs/health.webp";
+import Layout from "../../layouts/Layout.astro";
+import { locales, type Locale } from "../../i18n/strings";
+import { researchThemes } from "../../data/research";
+import { projects } from "../../data/projects";
+import { publications } from "../../data/publications";
+import { news } from "../../data/news";
+import { pi, phdStudents, masterStudents, bachelorStudents, researchMembers, staff, alumni } from "../../data/members";
+import { recruit } from "../../data/recruit";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return locales.flatMap(locale => ["research", "projects", "papers", "members", "recruit", "news"].map(page => ({ params: { locale, page } })));
+}
+const locale = Astro.params.locale as Locale;
+const page = Astro.params.page!;
+const ja = locale === "ja";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const titles: Record<string, string> = { research: "Research", projects: "Projects", papers: "Papers", members: "Members", recruit: "Join our lab.", news: "What’s new." };
+const descriptions: Record<string, string> = ja ? {
+  research: "回路とAI、セキュリティ、3Dセンシング。ハードとソフトの境界を越えて、未来の技術を探求します。",
+  projects: "アイデアを、実社会のインパクトへ。CSGの研究プロジェクトをご紹介します。",
+  papers: "コンピューティングとセンシングの最前線へ。これまでの研究成果。",
+  members: "異なる専門と好奇心を持ち寄り、新しい可能性をひらく仲間たち。",
+  recruit: "慶應から、世界へ。次の挑戦を、一緒に。",
+  news: "論文、受賞、研究活動。研究室の最新情報をお届けします。",
+} : {
+  research: "Circuits and AI, security, and 3D sensing. Exploring the future across hardware and software.",
+  projects: "Turning ideas into real-world impact. Explore our research projects.",
+  papers: "Research at the frontier of computing and sensing.",
+  members: "Different perspectives. Shared curiosity. Meet the people behind CSG.",
+  recruit: "From Keio to the world. Let’s take the next step together.",
+  news: "Publications, awards, and everyday discoveries from our lab.",
+};
+const memberGroups = [
+  { title: "Ph.D. Students", members: phdStudents },
+  { title: "Master’s Students", members: masterStudents },
+  { title: "Bachelor’s Students", members: bachelorStudents },
+  { title: "Research Members", members: researchMembers },
+  { title: "Staff", members: staff },
+];
+const sortedPapers = [...publications].sort((a, b) => b.year - a.year);
+const years = [...new Set(sortedPapers.map(p => p.year))];
+// Only expose resource links with a specific destination, not imported placeholder homepages.
+const resourceLinks = (links?: { label: string; href: string }[]) => (links ?? []).filter(link => new URL(link.href).pathname !== "/");
+---
+<Layout locale={locale} path={`/${page}`} title={titles[page]} description={descriptions[page]}>
+  <div class="page-heading"><div class="shell"><p class="breadcrumb"><a href={`${base}/${locale}`}>Home</a> / {titles[page]}</p><p class="eyebrow">COMPUTING AND SENSING GROUP</p><h1>{titles[page]}</h1><p class="lead">{descriptions[page]}</p></div></div>
+  <div class="shell section">
+    {page === "research" && researchThemes.map((theme, i) => <section class="detail-section" id={theme.slug}>
+      <p class="eyebrow">0{i + 1} / {theme.title.en}</p><h2>{theme.title[locale]}</h2><p class="prose-block">{theme.summary[locale]}</p>
+      <h3>{ja ? "研究テーマ" : "Research topics"}</h3><ul>{theme.projects.map(project => <li>{project[locale]}</li>)}</ul>
+      {theme.achievements && <><h3>{ja ? "主な成果" : "Highlights"}</h3><ul>{theme.achievements.map(item => <li>{item.text[locale]}</li>)}</ul></>}
+      {theme.collaborators && <><h3>{ja ? "共同研究" : "Collaborators"}</h3><p>{theme.collaborators.join(" / ")}</p></>}
+      <a class="text-link" href={`${base}/${locale}/papers`}>{ja ? "発表論文を見る" : "Explore publications"} ↗</a>
+    </section>)}
+    {page === "projects" && projects.map(project => <article class="detail-section" id={project.slug}>
+      <p class="eyebrow">{project.venue} / {project.year} / {project.tag}</p><h2>{project.title}</h2><p class="subtitle">{project.subtitle}</p><p class="project-description">{project.summary[locale]}</p>
+      {project.sections?.map(section => <div class="prose-block" lang="en"><h3>{section.heading}</h3><p>{section.body}</p></div>)}
+      <div class="link-row">{resourceLinks(project.links).map(link => <a class="text-link" href={link.href} target="_blank" rel="noopener">{link.label} ↗</a>)}</div>
+    </article>)}
+    {page === "papers" && <>
+      <div class="paper-tools" hidden id="paper-tools">
+        <label>{ja ? "キーワードで検索" : "Search publications"}<input id="paper-search" type="search" placeholder={ja ? "タイトル・著者・学会名" : "Title, author, or venue"} /></label>
+        <label>{ja ? "発表年" : "Year"}<select id="paper-year"><option value="">{ja ? "すべての年" : "All years"}</option>{years.map(year => <option value={year}>{year}</option>)}</select></label>
+        <p id="paper-count" class="paper-count" aria-live="polite" data-label={ja ? "件の論文" : "publications"}>{sortedPapers.length} {ja ? "件の論文" : "publications"}</p>
+      </div>
+      <div id="paper-list">{sortedPapers.map(paper => <article class="paper-item" data-year={paper.year} data-search={`${paper.title} ${paper.authors} ${paper.venue}`.toLowerCase()}>
+        <span class="tag">{paper.year} / {paper.type}</span><h2>{paper.title}</h2><p>{paper.authors}</p><p class="paper-venue">{paper.venue}</p>{paper.note && <p>{paper.note}</p>}{paper.award && <p class="paper-venue">{paper.award}</p>}
+        {resourceLinks(paper.links).map(link => <a class="text-link" href={link.href} target="_blank" rel="noopener">{link.label} ↗</a>)}
+      </article>)}</div><p class="empty-state" id="paper-empty" hidden>{ja ? "条件に一致する論文がありません。キーワードや年を変更してください。" : "No publications match. Try another keyword or year."}</p>
+    </>}
+    {page === "members" && <>
+      <section class="detail-section"><p class="eyebrow">PRINCIPAL INVESTIGATOR</p><h2>{ja ? "吉岡 健太郎 / Kentaro Yoshioka" : pi.name}</h2><p class="subtitle">{pi.title[locale]}</p>
+        {[...pi.bio].reverse().map(item => <div class="prose-block"><h3>{item.period}</h3><p>{item[locale]}</p></div>)}
+        <div class="link-row"><a class="text-link" href={`mailto:${site.email}`}>Email ↗</a><a class="text-link" href={pi.links.github} target="_blank" rel="noopener">GitHub ↗</a><a class="text-link" href={pi.links.kaggle} target="_blank" rel="noopener">Kaggle ↗</a></div>
+      </section>
+      {memberGroups.map(group => <section class="detail-section"><h2>{group.title}</h2><div class="member-grid">{group.members.map(member => <article class="member-card"><span class="member-initials" aria-hidden="true">{member.name.split(" ").map(part => part[0]).slice(0, 2).join("")}</span><h3>{member.name}</h3><span class="member-team">{member.team}</span>{member.comment && <p>{member.comment}</p>}<div class="link-row">{member.mail && <a class="text-link" href={`mailto:${member.mail}`}>Email ↗</a>}{member.github && <a class="text-link" href={member.github} target="_blank" rel="noopener">GitHub ↗</a>}</div></article>)}</div></section>)}
+      <section class="detail-section"><h2>Alumni</h2><div class="member-grid">{alumni.map(member => <article class="member-card"><h3>{member.name}</h3><p>{member.destination}</p>{member.url && <a class="text-link" href={member.url} target="_blank" rel="noopener">Website ↗</a>}</article>)}</div></section>
+    </>}
+    {page === "recruit" && <>
+      <section class="detail-section recruit-welcome"><img class="recruit-mascot" src={mascot.src} width={mascot.width} height={mascot.height} alt={ja ? "研究室のマスコット" : "Our lab mascot"} /><p class="eyebrow">YOUR NEXT CHAPTER</p><h2>{ja ? "まずは、研究室に来てみませんか。" : "Your curiosity belongs here."}</h2><p class="prose-block">{recruit.intro[locale]}</p><div class="link-row"><a class="button button-primary" href={`mailto:${site.email}`}>{ja ? "見学について問い合わせる" : "Arrange a lab visit"} <span aria-hidden="true">↗</span></a></div></section>
+      <section class="detail-section"><h2>{ja ? "ハードも、ソフトも。" : "Hardware meets software."}</h2><p class="prose-block">{recruit.tracks[locale]}</p>{recruit.ongoingProjects.map(project => <div class="prose-block"><h3>{project.title[locale]}</h3><p>{project.body[locale]}</p></div>)}</section>
+      <section class="detail-section"><h2>{ja ? "研究室のカルチャー" : "Our culture"}</h2><p class="prose-block">{recruit.culture[locale]}</p><h3>{ja ? "卒業後の進路" : "Where our alumni go"}</h3><p>{recruit.outcomes[locale]}</p></section>
+      <section class="detail-section"><h2>{ja ? "メンバーの声" : "In our members’ words"}</h2>{recruit.voices.map(voice => <div><h3>{voice.q[locale]}</h3><ul>{voice.a.map(answer => <li>{answer[locale]}</li>)}</ul></div>)}</section>
+      <section class="detail-section"><h2>{ja ? "よくある質問" : "Frequently asked questions"}</h2>{recruit.faq.map(item => <details class="faq-item"><summary>{item.q[locale]}</summary><p class="prose-block">{item.a[locale]}</p></details>)}</section>
+    </>}
+    {page === "news" && <ul class="news-list all-news">{news.map(item => <li><div class="news-meta"><time datetime={item.date}>{item.date.replace("-", ".")}</time><span class={`tag tag-${item.tag}`}>{item.tag ?? "lab"}</span></div><p>{item[locale]}</p></li>)}</ul>}
+  </div>
+</Layout>
+<script>
+  const search = document.querySelector<HTMLInputElement>("#paper-search");
+  const year = document.querySelector<HTMLSelectElement>("#paper-year");
+  const count = document.querySelector<HTMLElement>("#paper-count");
+  const empty = document.querySelector<HTMLElement>("#paper-empty");
+  const papers = [...document.querySelectorAll<HTMLElement>(".paper-item")];
+  const tools = document.querySelector<HTMLElement>("#paper-tools");
+  if (tools) tools.hidden = false;
+  function filterPapers() {
+    const query = (search?.value ?? "").trim().toLowerCase();
+    let visible = 0;
+    papers.forEach(paper => {
+      const matches = (!year?.value || paper.dataset.year === year.value) && (paper.dataset.search ?? "").includes(query);
+      paper.hidden = !matches;
+      if (matches) visible++;
+    });
+    if (count) count.textContent = `${visible} ${count.dataset.label}`;
+    if (empty) empty.hidden = visible > 0;
+  }
+  search?.addEventListener("input", filterPapers);
+  year?.addEventListener("change", filterPapers);
+</script>

@@ -58,9 +58,10 @@ const jsonLd = {
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="min-h-screen antialiased">
+  <body>
+    <a class="skip-link" href="#main-content">{locale === "ja" ? "本文へ移動" : "Skip to content"}</a>
     <Header locale={locale} path={path} />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer locale={locale} />
