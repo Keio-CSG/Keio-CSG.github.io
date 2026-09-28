@@ -1,12 +1,12 @@
 export const recruit = {
-  updated: "2025/9/22",
+  updated: "2026/9/28",
   intro: {
     ja: "学部3年生配属及び大学院から吉岡研に入りたい方・興味がある方は、吉岡（kyoshioka47@keio.jp）にメールをください！ 「配属に興味があるのですが、見学できますか？」程度の文面で大丈夫です。研究内容の説明や先輩との簡単な懇談を通して研究室説明を行っています。配属期間は早めに・積極的に教員に連絡を取り、色々な話を聞いた上で入りたい研究室を絞ってみてください。",
     en: "If you're a B3 student considering lab assignment, or a prospective graduate student interested in joining CSG, please email Ken (kyoshioka47@keio.jp). A short message like \"I'm interested in the lab, could I visit?\" is enough. We'll walk you through our research and let you chat informally with current members. Reach out to faculty early and talk to several labs before deciding.",
   },
   infoSessions: {
-    year: "2025",
-    slots: ["10/22 15:30–", "10/24 15:00–", "10/31 15:00–", "11/5 15:30–"],
+    year: "2026",
+    slots: ["10/21 16:00–", "10/23 15:30–", "10/28 16:00–", "11/4 16:00–"],
     note: {
       ja: "予約は不要です。研究室説明30分、先輩との懇談30分ほどを予定しています。23-214に来てください。",
       en: "No reservation needed. About 30 minutes of lab introduction plus 30 minutes chatting with current members. Meet at room 23-214.",
