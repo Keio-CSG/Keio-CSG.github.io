@@ -1,10 +1,14 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/PageHero.astro";
 import Icon from "../../components/Icon.astro";
+import ProjectTeaser from "../../components/ProjectTeaser.astro";
 import { site } from "../../data/site";
 import { recruit } from "../../data/recruit";
 import { whyCsg, studentAwards, careerOutcomes, facilities } from "../../data/highlights";
+import { categoryOf, categoryLabels, type ProjectCategory } from "../../data/projectCategories";
 import { locales, type Locale } from "../../i18n/strings";
 
 export function getStaticPaths() {
@@ -14,6 +18,40 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const ja = locale === "ja";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+/** Scene illustrations for the "what you get" cards, drawn in the project-art style. */
+const scenes = import.meta.glob<{ default: ImageMetadata }>("../../assets/recruit/*.webp", { eager: true });
+const sceneFor = (art?: string) => (art ? scenes[`../../assets/recruit/${art}.webp`]?.default : undefined);
+
+/**
+ * One color per track, used for its card, its project chips and the hero art,
+ * so a student can follow a track through the page. The warm ember is the
+ * accent the illustrations reserve for the attack, which is what security is.
+ */
+const trackStyle: Record<ProjectCategory, { bar: string; chip: string; art: string; heroArt: string }> = {
+  computing: { bar: "bg-coral-500", chip: "bg-coral-300 text-coral-600", art: "pacim", heroArt: "saliency-cim" },
+  security: { bar: "bg-ember-400", chip: "bg-ember-100 text-ember-600", art: "lidar-spoof-highspeed", heroArt: "pulsar-net" },
+  sensing: { bar: "bg-sky-400", chip: "bg-sky-200 text-navy-800", art: "basket-lidar", heroArt: "lidar-beacon" },
+};
+// The hero, the track cards and the newest-projects gallery each show different
+// artwork; none of the six slugs above should be among the newest projects.
+
+/** "10/21 16:00–" → date, weekday and time, so the weekday follows the locale. */
+const weekdays = { ja: ["日", "月", "火", "水", "木", "金", "土"], en: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] };
+const sessions = recruit.infoSessions.slots.map((slot) => {
+  const m = slot.match(/^(\d{1,2})\/(\d{1,2})\s+(.*)$/);
+  if (!m) return { date: slot, weekday: "", time: "" };
+  const day = new Date(Number(recruit.infoSessions.year), Number(m[1]) - 1, Number(m[2])).getDay();
+  return { date: `${m[1]}/${m[2]}`, weekday: weekdays[locale][day], time: m[3] };
+});
+
+// What students are working on right now: the newest projects, all with artwork.
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.year - a.data.year || (a.data.order ?? 99) - (b.data.order ?? 99))
+  .slice(0, 6);
+
+const voiceTints = ["bg-sky-200/70", "bg-ember-50", "bg-paper-200"];
+const voiceMarks = ["text-coral-500", "text-ember-400", "text-sky-400"];
 
 const description = ja
   ? "慶應理工 吉岡研究室（CSG）の配属を検討している学部3年生・大学院進学希望者へ。研究室説明会の日程、研究テーマ、研究室の文化、先輩の声、FAQを掲載しています。"
@@ -38,84 +76,197 @@ const description = ja
       </a>
       <a
         href="#sessions"
-        class="rounded-xl border-2 border-navy-800 px-5 py-3 text-sm font-bold text-navy-800 transition-colors hover:bg-navy-800 hover:text-paper-50"
+        class="rounded-xl border-2 border-navy-800 bg-paper-50 px-5 py-3 text-sm font-bold text-navy-800 transition-colors hover:bg-navy-800 hover:text-paper-50"
       >
         {ja ? "説明会の日程を見る" : "See info sessions"}
       </a>
     </div>
     <p class="mt-5 text-xs text-navy-500">{ja ? `最終更新 ${recruit.updated}` : `Last updated ${recruit.updated}`}</p>
+
+    <!-- The three tracks at a glance, each in its own color. -->
+    <div slot="aside" class="grid grid-cols-2 gap-3 sm:gap-4">
+      {recruit.ongoingProjects.map((p, i) => (
+        <figure
+          class:list={[
+            "paper-card relative overflow-hidden rounded-2xl border border-navy-900/8 bg-paper-50",
+            i === 0 && "col-span-2",
+          ]}
+        >
+          <div class="aspect-16/9">
+            <ProjectTeaser category={p.category} seed={trackStyle[p.category].heroArt} class="h-full w-full" />
+          </div>
+          <figcaption class="flex items-center gap-2 border-t border-navy-900/8 px-3.5 py-2.5">
+            <span class:list={["h-2.5 w-2.5 shrink-0 rounded-full", trackStyle[p.category].bar]}></span>
+            <span class="text-xs font-bold leading-snug text-navy-800">{ja ? categoryLabels[p.category].ja : categoryLabels[p.category].en}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
   </PageHero>
 
   <!-- Why join -->
   <section class="border-b border-navy-900/8 bg-paper-200/50">
     <div class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "CSGで、何が得られるか" : "What you get at CSG"}</h2>
+      <p class="text-xs font-bold uppercase tracking-widest text-ember-600">Why CSG</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">{ja ? "CSGで、何が得られるか" : "What you get at CSG"}</h2>
       <div class="mt-11 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {whyCsg.map((h) => (
-          <div class="paper-card flex flex-col rounded-2xl bg-paper-50 p-7">
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-coral-300/25 text-coral-600">
-              <Icon name={h.icon} />
-            </span>
-            <h3 class="mt-5 text-base font-bold tracking-tight text-navy-900">{ja ? h.title.ja : h.title.en}</h3>
-            <p class="mt-3 flex-1 text-sm leading-relaxed text-navy-600">{ja ? h.body.ja : h.body.en}</p>
-            {h.proof && <p class="mt-5 font-mono text-xs font-medium text-coral-600">{ja ? h.proof.ja : h.proof.en}</p>}
-          </div>
-        ))}
+        {whyCsg.map((h) => {
+          const scene = sceneFor(h.art);
+          return (
+            <div class="paper-card flex flex-col overflow-hidden rounded-2xl bg-paper-50">
+              {scene && (
+                <div class="aspect-16/9 border-b border-navy-900/8">
+                  <Image
+                    src={scene}
+                    alt=""
+                    widths={[480, 800]}
+                    sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                    class="h-full w-full bg-white object-cover"
+                  />
+                </div>
+              )}
+              <div class="flex flex-1 flex-col p-7">
+                <div class="flex items-center gap-3">
+                  <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-coral-300 text-coral-600">
+                    <Icon name={h.icon} class="h-5 w-5" />
+                  </span>
+                  <h3 class="text-base font-bold tracking-tight text-navy-900">{ja ? h.title.ja : h.title.en}</h3>
+                </div>
+                <p class="mt-4 flex-1 text-sm leading-relaxed text-navy-600">{ja ? h.body.ja : h.body.en}</p>
+                {h.proof && (
+                  <p class="mt-5 self-start rounded-full bg-ember-50 px-3 py-1 font-mono text-xs font-bold text-ember-600">
+                    {ja ? h.proof.ja : h.proof.en}
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  <!-- Info sessions -->
-  <section id="sessions" class="scroll-mt-20 border-b border-navy-900/8">
-    <div class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-navy-900">
+  <!-- Info sessions: the one thing to act on, so it gets the strongest band. -->
+  <section id="sessions" class="relative scroll-mt-20 overflow-hidden bg-navy-800">
+    <div class="trace-grid absolute inset-0 opacity-40"></div>
+    <div class="relative mx-auto max-w-6xl px-5 py-20">
+      <p class="text-xs font-bold uppercase tracking-widest text-ember-200">Info sessions</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-paper-50">
         {ja ? `${recruit.infoSessions.year}年度 研究室説明会` : `Lab info sessions (${recruit.infoSessions.year})`}
       </h2>
 
       <div class="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {recruit.infoSessions.slots.map((slot) => (
-          <div class="paper-card rounded-2xl border-l-4 border-coral-400 bg-paper-50 px-6 py-5">
-            <p class="font-mono text-lg font-bold text-navy-900">{slot}</p>
+        {sessions.map((s) => (
+          <div class="rounded-2xl bg-paper-50 px-6 py-5">
+            <div class="flex items-baseline gap-2">
+              <span class="font-mono text-3xl font-bold text-navy-900">{s.date}</span>
+              {s.weekday && (
+                <span class="rounded-md bg-ember-100 px-2 py-0.5 text-xs font-bold text-ember-600">{s.weekday}</span>
+              )}
+            </div>
+            {s.time && <p class="mt-1 font-mono text-sm font-medium text-coral-600">{s.time}</p>}
           </div>
         ))}
       </div>
 
-      <p class="mt-7 max-w-2xl leading-relaxed text-navy-600">
+      <p class="mt-8 max-w-2xl leading-relaxed text-sky-200">
         {ja ? recruit.infoSessions.note.ja : recruit.infoSessions.note.en}
       </p>
     </div>
   </section>
 
   <!-- Tracks -->
-  <section class="border-b border-navy-900/8 bg-paper-200/50">
+  <section class="border-b border-navy-900/8">
     <div class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "研究テーマ" : "Research tracks"}</h2>
+      <p class="text-xs font-bold uppercase tracking-widest text-coral-600">Tracks</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">{ja ? "研究テーマ" : "Research tracks"}</h2>
       <p class="mt-5 max-w-3xl leading-relaxed text-navy-600">{ja ? recruit.tracks.ja : recruit.tracks.en}</p>
 
       <div class="mt-11 grid gap-6 lg:grid-cols-3">
         {recruit.ongoingProjects.map((p) => (
-          <div class="paper-card flex flex-col rounded-2xl bg-paper-50 p-7">
-            <h3 class="text-lg font-bold tracking-tight text-navy-900">{ja ? p.title.ja : p.title.en}</h3>
-            <p class="mt-4 flex-1 text-sm leading-relaxed text-navy-600">{ja ? p.body.ja : p.body.en}</p>
+          <div class="paper-card flex flex-col overflow-hidden rounded-2xl bg-paper-50">
+            <div class:list={["h-1.5", trackStyle[p.category].bar]}></div>
+            <div class="aspect-16/9 border-b border-navy-900/8">
+              <ProjectTeaser category={p.category} seed={trackStyle[p.category].art} class="h-full w-full" />
+            </div>
+            <div class="flex flex-1 flex-col p-7">
+              <h3 class="text-lg font-bold tracking-tight text-navy-900">{ja ? p.title.ja : p.title.en}</h3>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-navy-600">{ja ? p.body.ja : p.body.en}</p>
 
-            <dl class="mt-6 space-y-2.5 border-t border-navy-900/8 pt-5 text-xs">
-              <div>
-                <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "スポンサー" : "Sponsors"}</dt>
-                <dd class="mt-1 text-navy-700">{ja ? p.sponsors.ja : p.sponsors.en}</dd>
-              </div>
-              <div>
-                <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "共同研究" : "Collaborators"}</dt>
-                <dd class="mt-1 text-navy-700">{ja ? p.collaborators.ja : p.collaborators.en}</dd>
-              </div>
-              {p.examples && (
+              <dl class="mt-6 space-y-2.5 border-t border-navy-900/8 pt-5 text-xs">
                 <div>
-                  <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "成果例" : "Recent output"}</dt>
-                  <dd class="mt-1 font-mono text-navy-700">{p.examples}</dd>
+                  <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "スポンサー" : "Sponsors"}</dt>
+                  <dd class="mt-1 text-navy-700">{ja ? p.sponsors.ja : p.sponsors.en}</dd>
                 </div>
-              )}
-            </dl>
+                <div>
+                  <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "共同研究" : "Collaborators"}</dt>
+                  <dd class="mt-1 text-navy-700">{ja ? p.collaborators.ja : p.collaborators.en}</dd>
+                </div>
+                {p.examples && (
+                  <div>
+                    <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "成果例" : "Recent output"}</dt>
+                    <dd class="mt-2 flex flex-wrap gap-1.5">
+                      {p.examples.split(/,\s*/).map((v) => (
+                        <span class:list={["rounded-md px-2 py-0.5 font-mono font-bold", trackStyle[p.category].chip]}>{v}</span>
+                      ))}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+
+              <a
+                href={`${base}/${locale}/projects?filter=category:${p.category}`}
+                class="mt-6 text-sm font-bold text-coral-600 hover:underline"
+              >
+                {ja ? "このテーマのプロジェクト →" : "Projects in this track →"}
+              </a>
+            </div>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What students are working on now -->
+  <section class="border-b border-navy-900/8 bg-sky-200/40">
+    <div class="mx-auto max-w-6xl px-5 py-20">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-coral-600">Projects</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">
+            {ja ? "先輩たちの、いまの研究" : "What students are working on"}
+          </h2>
+          <p class="mt-3 max-w-2xl text-navy-600">
+            {ja
+              ? "配属されたら、こうした研究に加わります。最新のプロジェクトから6件。"
+              : "This is the kind of work you would join. The six most recent projects."}
+          </p>
+        </div>
+        <a href={`${base}/${locale}/projects`} class="text-sm font-bold text-coral-600 hover:underline">
+          {ja ? "すべてのプロジェクト →" : "All projects →"}
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => {
+          const c = categoryOf(p);
+          return (
+            <a
+              href={`${base}/${locale}/projects/${p.id}`}
+              class="paper-card paper-card-hover group flex flex-col overflow-hidden rounded-2xl border border-navy-900/8 bg-paper-50 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div class="aspect-16/9 overflow-hidden border-b border-navy-900/8">
+                <ProjectTeaser category={c} seed={p.id} class="h-full w-full transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div class="flex flex-1 flex-col gap-2.5 p-5">
+                <span class:list={["self-start rounded-md px-2 py-0.5 font-mono text-xs font-bold", trackStyle[c].chip]}>
+                  {p.data.venue} {p.data.year}
+                </span>
+                <h3 class="font-bold leading-snug tracking-tight text-navy-900 group-hover:text-coral-600">{p.data.short_title}</h3>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -125,7 +276,10 @@ const description = ja
     <div class="mx-auto grid max-w-6xl gap-14 px-5 py-20 lg:grid-cols-2">
       <div>
         <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "研究室の文化" : "Lab culture"}</h2>
-        <p class="mt-5 leading-relaxed text-navy-600">{ja ? recruit.culture.ja : recruit.culture.en}</p>
+        <p class="mt-6 inline-block rounded-2xl bg-ember-50 px-5 py-3 text-xl font-bold tracking-tight text-ember-600">
+          {ja ? "慶應から世界へ" : "From Keio to the world"}
+        </p>
+        <p class="mt-6 leading-relaxed text-navy-600">{ja ? recruit.culture.ja : recruit.culture.en}</p>
 
         <h3 class="mt-10 text-xs font-bold uppercase tracking-widest text-navy-500">
           {ja ? "卒業生の進路" : "Career outcomes"}
@@ -134,8 +288,8 @@ const description = ja
           {careerOutcomes.map((c) => (
             <li
               class:list={[
-                "rounded-full px-3.5 py-2 text-sm font-medium",
-                c.kind === "academia" ? "bg-navy-800 text-paper-50" : "bg-paper-300/70 text-navy-800",
+                "rounded-full px-3.5 py-2 text-sm font-bold",
+                c.kind === "academia" ? "bg-navy-800 text-paper-50" : "bg-sky-200 text-navy-800",
               ]}
             >
               {c.destination}
@@ -147,9 +301,9 @@ const description = ja
       <div>
         <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "使える設備" : "What you can use"}</h2>
         <ul class="mt-7 space-y-3">
-          {facilities.map((f) => (
+          {facilities.map((f, i) => (
             <li class="paper-card flex items-center gap-3 rounded-xl bg-paper-50 px-5 py-4 text-sm font-medium text-navy-800">
-              <span class="h-2 w-2 shrink-0 rounded-full bg-coral-400"></span>
+              <span class:list={["h-2.5 w-2.5 shrink-0 rounded-full", ["bg-coral-500", "bg-ember-400", "bg-sky-400"][i % 3]]}></span>
               {ja ? f.ja : f.en}
             </li>
           ))}
@@ -159,9 +313,10 @@ const description = ja
   </section>
 
   <!-- Student awards -->
-  <section class="border-b border-navy-900/8 bg-paper-200/50">
+  <section class="border-b border-navy-900/8 bg-ember-50/70">
     <div class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "学生が獲った賞" : "Awards won by students"}</h2>
+      <p class="text-xs font-bold uppercase tracking-widest text-ember-600">Awards</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">{ja ? "学生が獲った賞" : "Awards won by students"}</h2>
       <p class="mt-3 max-w-2xl text-navy-600">
         {ja
           ? "第一著者として評価されるチャンスがあります。学部生・修士でも国際学会で受賞しています。"
@@ -169,10 +324,15 @@ const description = ja
       </p>
       <ul class="mt-9 grid gap-3 md:grid-cols-2">
         {studentAwards.map((a) => (
-          <li class="paper-card flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-xl bg-paper-50 px-5 py-4">
-            <span class="font-mono text-xs font-bold text-coral-600">{a.year}</span>
-            <span class="text-sm font-bold text-navy-900">{ja ? a.name.ja : a.name.en}</span>
-            <span class="text-sm text-navy-600">{ja ? a.award.ja : a.award.en}</span>
+          <li class="paper-card flex items-center gap-4 rounded-xl bg-paper-50 px-5 py-4">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ember-100 text-ember-600">
+              <Icon name="award" class="h-5 w-5" />
+            </span>
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+              <span class="font-mono text-xs font-bold text-ember-600">{a.year}</span>
+              <span class="text-sm font-bold text-navy-900">{ja ? a.name.ja : a.name.en}</span>
+              <span class="text-sm text-navy-600">{ja ? a.award.ja : a.award.en}</span>
+            </div>
           </li>
         ))}
       </ul>
@@ -182,16 +342,18 @@ const description = ja
   <!-- Voices -->
   <section class="border-b border-navy-900/8">
     <div class="mx-auto max-w-6xl px-5 py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-navy-900">{ja ? "先輩の声" : "Student voices"}</h2>
+      <p class="text-xs font-bold uppercase tracking-widest text-coral-600">Voices</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">{ja ? "先輩の声" : "Student voices"}</h2>
 
       <div class="mt-11 space-y-12">
-        {recruit.voices.map((v) => (
+        {recruit.voices.map((v, i) => (
           <div>
             <h3 class="text-lg font-bold text-navy-900">{ja ? v.q.ja : v.q.en}</h3>
             <ul class="mt-5 grid gap-3 md:grid-cols-2">
               {v.a.map((ans) => (
-                <li class="paper-card rounded-2xl bg-paper-50 px-6 py-5 text-sm leading-relaxed text-navy-700">
-                  「{ja ? ans.ja : ans.en}」
+                <li class:list={["relative rounded-2xl px-6 py-5 pl-14 text-sm leading-relaxed text-navy-700", voiceTints[i % 3]]}>
+                  <span class:list={["absolute left-5 top-3 font-serif text-4xl leading-none", voiceMarks[i % 3]]} aria-hidden="true">“</span>
+                  {ja ? ans.ja : ans.en}
                 </li>
               ))}
             </ul>
@@ -209,8 +371,8 @@ const description = ja
         {recruit.faq.map((f) => (
           <details class="paper-card group rounded-2xl bg-paper-50 px-6 py-5">
             <summary class="flex cursor-pointer items-start gap-3 font-bold text-navy-900 marker:content-['']">
-              <span class="mt-0.5 text-coral-500">Q</span>
-              <span class="flex-1">{ja ? f.q.ja : f.q.en}</span>
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-coral-500 text-sm text-paper-50">Q</span>
+              <span class="flex-1 pt-0.5">{ja ? f.q.ja : f.q.en}</span>
               <span class="mt-1 shrink-0 text-navy-400 transition-transform group-open:rotate-45">＋</span>
             </summary>
             <p class="mt-4 border-t border-navy-900/8 pt-4 text-sm leading-relaxed text-navy-600">
@@ -235,7 +397,7 @@ const description = ja
         </p>
         <a
           href={`mailto:${site.email}`}
-          class="mt-9 inline-flex items-center gap-2 rounded-xl bg-sand-400 px-6 py-3.5 text-sm font-bold text-navy-900 transition-colors hover:bg-sand-300"
+          class="mt-9 inline-flex items-center gap-2 rounded-xl bg-coral-500 px-6 py-3.5 text-sm font-bold !text-paper-50 transition-colors hover:bg-coral-600"
         >
           <Icon name="mail" class="h-4 w-4" />
           {site.email}

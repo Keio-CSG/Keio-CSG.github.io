@@ -5,11 +5,14 @@ export interface Highlight {
   title: { ja: string; en: string };
   body: { ja: string; en: string };
   proof?: { ja: string; en: string };
+  /** Scene illustration at src/assets/recruit/<art>.webp; the icon stands in until it exists. */
+  art?: string;
 }
 
 export const whyCsg: Highlight[] = [
   {
     icon: "chip",
+    art: "tapeout",
     title: { ja: "本物のチップを、自分で焼く", en: "You tape out real silicon" },
     body: {
       ja: "シミュレーションで終わりません。学生が設計した回路を実際に半導体プロセスで製造し、測定して論文にします。65nm・28nm・12nm FinFETでの試作実績があり、TSMCからの支援も受けています。",
@@ -19,6 +22,7 @@ export const whyCsg: Highlight[] = [
   },
   {
     icon: "car",
+    art: "vehicle",
     title: { ja: "実車を走らせて攻撃・防御する", en: "You attack and defend real vehicles" },
     body: {
       ja: "LiDAR攻撃装置を自作し、実際の自動運転車を走行させて検証します。実機のLiDARを設計することもあります。ここまでやっている研究室は世界でも数えるほどしかありません。",
@@ -28,6 +32,7 @@ export const whyCsg: Highlight[] = [
   },
   {
     icon: "globe",
+    art: "world",
     title: { ja: "世界の研究者と、直接やり合う", en: "You engage the world directly" },
     body: {
       ja: "国際学会での発表を全員が目指します。UC Irvine、フロリダ大、南京大学、東南大学、ソニー、アイシンとの共同研究が動いており、海外からの留学生も在籍しています。",
@@ -37,6 +42,7 @@ export const whyCsg: Highlight[] = [
   },
   {
     icon: "sparkle",
+    art: "media",
     title: { ja: "研究成果が、世の中に届く", en: "Your work reaches the public" },
     body: {
       ja: "GIZMODO、日経クロステック、IEEE Spectrum、Tech Xploreなど国内外のメディアに研究が取り上げられています。プレスリリースも積極的に行っています。",
@@ -46,6 +52,7 @@ export const whyCsg: Highlight[] = [
   },
   {
     icon: "book",
+    art: "onboarding",
     title: { ja: "ゼロから始めても、追いつける", en: "You can start from zero" },
     body: {
       ja: "プログラミングやAIの経験は必須ではありません。新人研修と勉強会で、一生使える基礎力と専門性を身につけます。大事なのは、ハードとソフト両方をやってみたいという意志です。",
@@ -54,6 +61,7 @@ export const whyCsg: Highlight[] = [
   },
   {
     icon: "wallet",
+    art: "resources",
     title: { ja: "研究費に、困らない", en: "You won't lack resources" },
     body: {
       ja: "JST CREST 2件、JSTさきがけ、JST ASPIRE、次世代エッジAI事業、科研費基盤Bなど、大型予算を複数獲得しています。試作費も学会渡航費も心配なく研究に集中できます。",

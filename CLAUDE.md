@@ -142,6 +142,18 @@ PNG は `scripts/project-art/out/`（gitignore 済み）に残るので、気に
 その1枚を消して `generate.sh <slug>` を再実行すれば描き直せる。`CODEX` 環境変数で
 codex.exe のパスを上書きできる。
 
+**Recruit ページの「CSGで何が得られるか」の6枚も同じ作風で描いている。** 題材は
+`scripts/project-art/recruit.json`、置き場所は `src/assets/recruit/`。`highlights.ts` の
+`whyCsg[].art` がファイル名に対応し、画像がなければアイコンだけのカードになる。
+
+```bash
+SET=recruit bash scripts/project-art/generate.sh   # out/recruit/ に PNG
+node scripts/project-art/to-webp.js recruit        # src/assets/recruit/ へ
+```
+
+Codex のサンドボックスは Google Drive 上のフォルダに書き込めない。その場合も画像は
+`~/.codex/generated_images/` に残るので、`generate.sh` がログからパスを拾って回収する。
+
 **arXiv リンクがあるプロジェクトは、詳細ページに論文の Figure 1 を自動で載せられる。**
 
 ```
@@ -278,6 +290,7 @@ figs/                 イラスト原本（サイトからは直接参照しな�
 | `coral-*` | アクセント（イラストの車の色）。リンク・強調・CTA |
 | `sand-*` | 補助（黄）。受賞・ハイライト |
 | `sky-*` | 補助（空）。セクション見出しの背景グラデーション |
+| `ember-*` | イラストのコーラルから採った唯一の暖色。自動運転セキュリティのトラック色、受賞・強調に少量だけ |
 
 - **Tailwind の任意色（`bg-[#...]` や `bg-slate-500`）は使わず、必ずこのトークンを使う**
 - `.paper-card` / `.paper-card-hover` / `.trace-grid` / `.animate-rise` / `.animate-float` は

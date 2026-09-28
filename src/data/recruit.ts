@@ -1,3 +1,5 @@
+import type { ProjectCategory } from "./projectCategories";
+
 export const recruit = {
   updated: "2026/9/28",
   intro: {
@@ -8,8 +10,8 @@ export const recruit = {
     year: "2026",
     slots: ["10/21 16:00–", "10/23 15:30–", "10/28 16:00–", "11/4 16:00–"],
     note: {
-      ja: "予約は不要です。研究室説明30分、先輩との懇談30分ほどを予定しています。23-214に来てください。",
-      en: "No reservation needed. About 30 minutes of lab introduction plus 30 minutes chatting with current members. Meet at room 23-214.",
+      ja: "予約は不要です。研究室説明30分、先輩との懇談30分ほどを予定しています。23-214に来てください。都合が合わない方は個別に対応しますので、メールをください。",
+      en: "No reservation needed. About 30 minutes of lab introduction plus 30 minutes chatting with current members. Meet at room 23-214. If none of these times work, email us and we'll arrange a visit.",
     },
   },
   tracks: {
@@ -22,6 +24,7 @@ export const recruit = {
   },
   ongoingProjects: [
     {
+      category: "computing" as ProjectCategory,
       title: { ja: "回路：インメモリAIアクセラレータ", en: "Circuit: In-Memory AI Accelerators" },
       body: {
         ja: "メモリ内でAI計算を行うことで、従来回路よりも遥かに低い電力のAI回路の実現を目指しています。アナログ演算や確率的計算などのデジタル演算よりも革新的な計算方式による効率化を探求。実際の回路設計に加え、PyTorchを利用した回路フレンドリーなAIの学習・フレームワーク作成も行います。",
@@ -32,6 +35,7 @@ export const recruit = {
       examples: "CVPR'26 (Findings), ASP-DAC'26, SSDM'26, ISCAS'26, ICCV'25, ESSERC'25, ISSCC'24",
     },
     {
+      category: "security" as ProjectCategory,
       title: { ja: "センサ：自動運転セキュリティ", en: "Sensor: Autonomous Driving Security" },
       body: {
         ja: "自動運転に不可欠なLiDARセンサは多く使われていますが、そのセキュリティ性質はあまり調べられていません。吉岡研ではLiDARセンサの脆弱性発見や自動運転車における脅威を調査し、解決策を提案する研究を行っています。攻撃装置の構築のほか、実際にLiDARを設計したり試験用の自動運転車を走行させたりしている、世界でも数少ない研究室です。",
@@ -42,6 +46,7 @@ export const recruit = {
       examples: "ACM CCS'26, NeurIPS'26, IROS'26, VehicleSec'26, RA-L'25, ICRA'25, NDSS'25, NDSS'24",
     },
     {
+      category: "sensing" as ProjectCategory,
       title: { ja: "センサ：LiDARセンシング", en: "Sensor: LiDAR Sensing" },
       body: {
         ja: "LiDARセンサの高性能化・低価格化に伴い、医療やスポーツといった新しいアプリケーションが考えられます。そのような新規センシングアプリ開発を共同研究を通じ実現します。",

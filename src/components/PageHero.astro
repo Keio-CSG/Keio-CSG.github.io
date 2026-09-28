@@ -5,16 +5,26 @@ interface Props {
   lead?: string;
 }
 const { eyebrow, title, lead } = Astro.props;
+// An optional `aside` slot puts artwork beside the text on wide screens.
+const hasAside = Astro.slots.has("aside");
 ---
 
 <section class="relative overflow-hidden border-b border-navy-900/8 bg-gradient-to-b from-sky-200/45 to-paper-100">
   <div class="trace-grid absolute inset-0 opacity-70"></div>
-  <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
-    {eyebrow && (
-      <p class="text-xs font-bold uppercase tracking-widest text-coral-600">{eyebrow}</p>
-    )}
-    <h1 class="mt-3 text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">{title}</h1>
-    {lead && <p class="mt-5 max-w-2xl text-base leading-relaxed text-navy-600 md:text-lg">{lead}</p>}
-    <slot />
+  <div
+    class:list={[
+      "relative mx-auto max-w-6xl px-5 py-16 md:py-20",
+      hasAside && "grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]",
+    ]}
+  >
+    <div>
+      {eyebrow && (
+        <p class="text-xs font-bold uppercase tracking-widest text-coral-600">{eyebrow}</p>
+      )}
+      <h1 class="mt-3 text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">{title}</h1>
+      {lead && <p class="mt-5 max-w-2xl text-base leading-relaxed text-navy-600 md:text-lg">{lead}</p>}
+      <slot />
+    </div>
+    {hasAside && <div><slot name="aside" /></div>}
   </div>
 </section>

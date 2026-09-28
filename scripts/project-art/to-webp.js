@@ -1,6 +1,7 @@
 // Install the generated PNGs into src/assets/projects/ as webp.
 //
-//   node scripts/project-art/to-webp.js
+//   node scripts/project-art/to-webp.js            # out/*.png  -> src/assets/projects/
+//   node scripts/project-art/to-webp.js recruit    # out/recruit/*.png -> src/assets/recruit/
 //
 // Codex hands back ~1.3 MB PNGs at whatever size the model chose. The repo
 // keeps 1600x900 webp instead: Astro re-encodes to responsive webp on build
@@ -11,8 +12,9 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const src = path.join(here, "out");
-const dst = path.join(here, "..", "..", "src", "assets", "projects");
+const set = process.argv[2];
+const src = path.join(here, "out", set ?? "");
+const dst = path.join(here, "..", "..", "src", "assets", set ?? "projects");
 
 fs.mkdirSync(dst, { recursive: true });
 const files = fs.readdirSync(src).filter((f) => f.endsWith(".png"));
@@ -28,4 +30,4 @@ for (const f of files) {
   console.log(`${f.padEnd(28)} -> ${(fs.statSync(out).size / 1024).toFixed(0)} KB`);
 }
 
-console.log(`${files.length} images installed in src/assets/projects/`);
+console.log(`${files.length} images installed in src/assets/${set ?? "projects"}/`);

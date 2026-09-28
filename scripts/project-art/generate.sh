@@ -4,6 +4,10 @@
 #
 #   bash scripts/project-art/generate.sh             # every project still missing art
 #   bash scripts/project-art/generate.sh ghost-fwl   # just one, e.g. to redraw it
+#   SET=recruit bash scripts/project-art/generate.sh # the Recruit page scenes
+#
+# SET picks another subject file (<SET>.json) and writes to out/<SET>/, so a
+# page's own scenes share the house style without mixing into the project set.
 #
 # Each project's subject sentence lives in subjects.json; the style block below
 # is appended unchanged to every one of them. That is the whole trick — the set
@@ -18,6 +22,9 @@ set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
 CODEX="${CODEX:-$HOME/AppData/Local/OpenAI/Codex/bin/13995fba801849b0/codex.exe}"
 CONC="${CONC:-3}"
+SET="${SET:-}"
+SUBJECTS="${SET:-subjects}.json"
+OUT="$HERE/out${SET:+/$SET}"
 
 [ -x "$CODEX" ] || { echo "codex.exe not found at $CODEX — set CODEX=..." >&2; exit 1; }
 
@@ -36,32 +43,41 @@ sitting comfortably inside the frame with generous white margins.
 EOS
 
 one() {
-  local slug="$1" out="$HERE/out/$1.png"
+  local slug="$1" out="$OUT/$1.png"
   [ -s "$out" ] && { echo "SKIP $slug"; return 0; }
 
   local subject
-  subject=$(cd "$HERE" && node -e "process.stdout.write(require('./subjects.json')['$slug'] || '')")
-  [ -z "$subject" ] && { echo "FAIL $slug (no subject in subjects.json)"; return 1; }
+  subject=$(cd "$HERE" && node -e "process.stdout.write(require('./$SUBJECTS')['$slug'] || '')")
+  [ -z "$subject" ] && { echo "FAIL $slug (no subject in $SUBJECTS)"; return 1; }
 
   timeout 600 "$CODEX" exec -s workspace-write --skip-git-repo-check -C "$HERE" \
-    "Generate one illustration image and save it as ./out/$slug.png relative to $HERE.
+    "Generate one illustration image and save it as ./out${SET:+/$SET}/$slug.png relative to $HERE.
 
 Subject: $subject
 
 $STYLE
 
 Do not write any code or create any other files. Just generate the image, save it to that exact path, and report the path." \
-    >"$HERE/out/$slug.log" 2>&1
+    >"$OUT/$slug.log" 2>&1
 
-  [ -s "$out" ] && echo "OK   $slug" || echo "FAIL $slug (see out/$slug.log)"
+  if [ ! -s "$out" ]; then
+    # Codex's sandbox can't write into a synced folder such as Google Drive, but
+    # the image still lands in its own cache, named in the log. Pick it up there.
+    local id f=""
+    id=$(grep -aoE 'exec-[0-9a-f-]{36}\.png' "$OUT/$slug.log" | tail -1)
+    [ -n "$id" ] && f=$(find "$HOME/.codex/generated_images" -name "$id" 2>/dev/null | head -1)
+    [ -n "$f" ] && cp "$f" "$out"
+  fi
+
+  [ -s "$out" ] && echo "OK   $slug" || echo "FAIL $slug (see $OUT/$slug.log)"
 }
 
-mkdir -p "$HERE/out"
+mkdir -p "$OUT"
 
 if [ $# -gt 0 ]; then
   for s in "$@"; do one "$s"; done
 else
-  for s in $(cd "$HERE" && node -e "console.log(Object.keys(require('./subjects.json')).join(' '))"); do
+  for s in $(cd "$HERE" && node -e "console.log(Object.keys(require('./$SUBJECTS')).join(' '))"); do
     while [ "$(jobs -rp | wc -l)" -ge "$CONC" ]; do wait -n; done
     one "$s" &
   done

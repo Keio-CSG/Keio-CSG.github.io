@@ -28,6 +28,16 @@
   --color-sky-300: #c9e0ed;
   --color-sky-400: #9fc7dc;
 
+  /* The single warm accent the project illustrations use for the hazard or the
+     key result (sampled from them). Sparingly: tints for surfaces, 400 for
+     marks, 600 for text on white. */
+  --color-ember-50: #fdf3f1;
+  --color-ember-100: #fbe4df;
+  --color-ember-200: #f6c6bd;
+  --color-ember-400: #e88070;
+  --color-ember-500: #d9634f;
+  --color-ember-600: #b34a38;
+
   --font-sans: "Lato", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
 }
