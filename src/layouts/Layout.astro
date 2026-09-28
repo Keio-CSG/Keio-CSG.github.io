@@ -94,8 +94,9 @@ gtag('config', '${site.analyticsId}');
     }
   </head>
   <body class="min-h-screen antialiased">
+    <a class="skip-link" href="#main-content">{locale === "ja" ? "本文へ移動" : "Skip to content"}</a>
     <Header locale={locale} path={path} />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer locale={locale} />

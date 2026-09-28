@@ -1,33 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
-/* Palette sampled from the lab's hand-drawn isometric illustrations:
-   warm cream paper, navy circuit boards, coral vehicles, sand highlights, sky blue. */
+/* Keep the existing token names for all pages, with the approved light palette.
+   Blue matches the original Google Sites headings; artwork retains its own colors. */
 @theme {
-  --color-paper-50: #fffdf9;
-  --color-paper-100: #fdf8f0;
-  --color-paper-200: #f8f0e3;
-  --color-paper-300: #f0e4d1;
+  --color-paper-50: #ffffff;
+  --color-paper-100: #ffffff;
+  --color-paper-200: #f2f5f7;
+  --color-paper-300: #e4edf2;
 
-  --color-navy-900: #14243f;
-  --color-navy-800: #1b2f52;
-  --color-navy-700: #274370;
-  --color-navy-600: #3a5d92;
-  --color-navy-500: #5a80b0;
+  --color-navy-900: #213a49;
+  --color-navy-800: #274c61;
+  --color-navy-700: #364b56;
+  --color-navy-600: #465c68;
+  --color-navy-500: #53636c;
 
-  --color-coral-300: #f6b294;
-  --color-coral-400: #f09a75;
-  --color-coral-500: #e87e52;
-  --color-coral-600: #d4653a;
+  --color-coral-300: #d7e8f1;
+  --color-coral-400: #226e93;
+  --color-coral-500: #226e93;
+  --color-coral-600: #1b5b7b;
 
-  --color-sand-300: #f7d9a0;
-  --color-sand-400: #f3c878;
-  --color-sand-500: #e8b155;
+  --color-sand-300: #dcecf4;
+  --color-sand-400: #c2dce9;
+  --color-sand-500: #8db8ce;
 
-  --color-sky-200: #cbe3f5;
-  --color-sky-300: #a5cceb;
-  --color-sky-400: #7fb2dd;
+  --color-sky-200: #e7f1f6;
+  --color-sky-300: #c9e0ed;
+  --color-sky-400: #9fc7dc;
 
-  --font-sans: "Inter", "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --font-sans: "Lato", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
 }
 
@@ -68,7 +69,7 @@ body {
 .paper-card-hover:hover {
   box-shadow:
     0 2px 4px rgba(20, 36, 63, 0.05),
-    0 22px 48px -16px rgba(232, 126, 82, 0.3);
+    0 22px 48px -16px rgba(34, 110, 147, 0.15);
 }
 
 @keyframes rise {
@@ -101,10 +102,10 @@ body {
   animation: scan 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* Sections fade up as they enter the viewport; JS adds .is-visible */
+/* Content and project images remain visible before scrolling and without JS. */
 .reveal {
-  opacity: 0;
-  transform: translateY(22px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -125,4 +126,28 @@ body {
     transition: none;
   }
   html { scroll-behavior: auto; }
+}
+
+/* Readable typography and quiet surfaces across the existing page structure. */
+body { font-size: 16px; line-height: 1.8; }
+h1, h2, h3 { font-family: var(--font-sans); letter-spacing: -.015em; }
+p.leading-relaxed, li.leading-relaxed { line-height: 1.9; }
+.text-sm { font-size: .9375rem; }
+:focus-visible { outline: 2px solid var(--color-coral-500); outline-offset: 4px; }
+.home-hero-title { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.3; }
+.light-panel { background: var(--color-sky-200); }
+.light-panel h2 { color: var(--color-coral-500); }
+.light-panel p { color: var(--color-navy-700); }
+.light-panel a { color: var(--color-navy-800); border-color: var(--color-navy-600); }
+.light-panel a:hover { color: var(--color-coral-600); }
+.venue-strip { background: var(--color-paper-200); }
+.venue-strip span { color: var(--color-navy-600); }
+.venue-strip span:first-child { color: var(--color-coral-600); }
+.selected-project-card { border-radius: 1rem; }
+.selected-project-card img { display: block; aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.animate-float, .animate-scan, .animate-ping { animation: none; }
+.skip-link { position: fixed; top: -80px; left: 20px; z-index: 100; padding: 10px 20px; background: var(--color-coral-500); color: var(--color-paper-50); }
+.skip-link:focus { top: 10px; }
+@media (max-width: 639px) {
+ .home-hero-title { font-size: clamp(1.75rem, 7.2vw, 2.6rem); }
 }

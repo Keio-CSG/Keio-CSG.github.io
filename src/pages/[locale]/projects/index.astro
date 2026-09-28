@@ -82,7 +82,7 @@ const description = ja
           ]}
         >
           {ja ? f.label.ja : f.label.en}
-          <span class="font-mono text-[11px] font-medium opacity-60">{f.count}</span>
+          <span class="font-mono text-[11px] font-medium">{f.count}</span>
         </button>
       ))}
 
@@ -117,7 +117,7 @@ const description = ja
               data-category={categoryOf(p)}
               data-highlight={p.data.highlight ? "true" : "false"}
             >
-              <a href={`${base}/${locale}/projects/${p.id}`} class="block">
+              <a href={`${base}/${locale}/projects/${p.id}`} class="block" aria-label={p.data.short_title}>
                 <div class="aspect-16/9 overflow-hidden border-b border-navy-900/8">
                   <ProjectTeaser
                     category={categoryOf(p)}
