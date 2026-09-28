@@ -112,8 +112,35 @@ order: 1                       # 任意。同年内での並び順（小さい�
 English description here. 英語版ページの本文になる。Markdown が使える。
 ```
 
-**ティーザー画像は用意しなくてよい。** `src/components/ProjectTeaser.astro` が
-カテゴリ・学会名・年・短縮タイトルからサイトの配色で SVG を描画する。
+**カード画像は `src/assets/projects/<slug>.webp`。** ファイル名はプロジェクトの
+slug（`.md` のファイル名）と一致させる。これだけで `ProjectTeaser` が拾う。
+
+画像はその研究が何をしているかを描いた説明図で、白背景・紺／青＋コーラル1色・
+丸角の吹き出しパネル・破線の引き出し線という共通の作風で揃えてある。**文字は
+一切入れない**（カード側が学会名・年・タイトルを出すため、また日英で同じ画像を
+使い回すため）。作り方は「プロジェクト画像を作り直す」を参照。
+
+**画像がなければ自動生成にフォールバックする。** `src/components/GeneratedTeaser.astro`
+が slug から抽象的な構図を描くので、画像がまだなくてもカードは崩れない。
+プロジェクト追加が画像待ちでブロックされないようにするための仕組み。
+
+#### プロジェクト画像を作り直す
+
+Codex CLI の画像生成を使う。プロジェクトごとの「何を描くか」は
+`scripts/project-art/subjects.json` に1文で書いてある。作風の指定は
+`generate.sh` の中に1つだけ持っていて、全プロジェクトに同じものが付く。
+**21枚が1つのシリーズに見えるのはこれが理由**なので、作風を1枚だけ変えない。
+
+```bash
+# プロジェクトを追加したら subjects.json に1行足してから
+bash scripts/project-art/generate.sh              # 未生成のものだけ
+bash scripts/project-art/generate.sh ghost-fwl    # 1枚だけ描き直す
+node scripts/project-art/to-webp.js               # 16:9に切って webp で src/assets/projects/ へ
+```
+
+PNG は `scripts/project-art/out/`（gitignore 済み）に残るので、気に入らなければ
+その1枚を消して `generate.sh <slug>` を再実行すれば描き直せる。`CODEX` 環境変数で
+codex.exe のパスを上書きできる。
 
 **arXiv リンクがあるプロジェクトは、詳細ページに論文の Figure 1 を自動で載せられる。**
 
@@ -127,8 +154,9 @@ python scripts/fetch-figures.py src/content/projects src/assets/figures
 取得できたら `src/data/paperFigures.ts` に1行追加する。図が見つからない論文は
 スキップされ、生成ティーザーにフォールバックするだけなので失敗しても壊れない。
 
-**一覧カードは常に生成ティーザー。** 論文の図は白背景・高密度で縦横比もバラバラなため、
-カード幅（約380px）では判読できず統一感も崩れる。大きく出せる詳細ページに限って使う。
+**一覧カードには論文の図を使わない。** 論文の図は高密度で縦横比もバラバラなため、
+カード幅（約380px）では判読できず統一感も崩れる。大きく出せる詳細ページに限って使い、
+カードは上記の説明図（なければ生成ティーザー）に統一する。
 上流由来の `teaser:` フィールドと `public/projects/*.svg` は互換のため残してあるが、
 描画には使っていない（上流のティーザーはダークテーマで、この暖色系サイトから浮くため）。
 

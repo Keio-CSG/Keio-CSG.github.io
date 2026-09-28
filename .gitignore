@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Generated project artwork: large PNGs, installed as webp under src/assets/projects/
+scripts/project-art/out/
