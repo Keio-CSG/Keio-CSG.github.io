@@ -27,9 +27,9 @@ export const recruit = {
         ja: "メモリ内でAI計算を行うことで、従来回路よりも遥かに低い電力のAI回路の実現を目指しています。アナログ演算や確率的計算などのデジタル演算よりも革新的な計算方式による効率化を探求。実際の回路設計に加え、PyTorchを利用した回路フレンドリーなAIの学習・フレームワーク作成も行います。",
         en: "We perform AI computation directly inside memory to build far more power-efficient AI circuits than conventional designs, exploring analog and probabilistic computation beyond digital arithmetic. Alongside real circuit design, we build PyTorch-based training and frameworks for circuit-friendly AI.",
       },
-      sponsors: { ja: "JST CREST / 科研費 / 理研 他", en: "JST CREST / KAKENHI / RIKEN and others" },
+      sponsors: { ja: "JST CREST / 科研費 / 理研 / JST 次世代AI 他", en: "JST CREST / KAKENHI / RIKEN / JST Next-Generation AI and others" },
       collaborators: { ja: "東京大学、京都大学、静岡大学、情報工学科 藤木研 など", en: "Univ. of Tokyo, Kyoto Univ., Shizuoka Univ., Fujiki Lab (Keio CS) and others" },
-      examples: "ICCV'25, ESSERC'25, ICCAD'24, SSDM'24, ISSCC'24, ASP-DAC'24",
+      examples: "CVPR'26 (Findings), ASP-DAC'26, SSDM'26, ISCAS'26, ICCV'25, ESSERC'25, ISSCC'24",
     },
     {
       title: { ja: "センサ：自動運転セキュリティ", en: "Sensor: Autonomous Driving Security" },
@@ -39,7 +39,7 @@ export const recruit = {
       },
       sponsors: { ja: "JST CREST / JST さきがけ / 科研費 他", en: "JST CREST / JST PRESTO / KAKENHI and others" },
       collaborators: { ja: "University of California, Irvine / University of Florida / 早稲田大学 / 電気通信大学 / ソニー", en: "University of California, Irvine / University of Florida / Waseda University / UEC / Sony" },
-      examples: "RA-L'25, ICRA'25, NDSS'25, NDSS'24, VehicleSec'24, VehicleSec'23",
+      examples: "ACM CCS'26, NeurIPS'26, IROS'26, VehicleSec'26, RA-L'25, ICRA'25, NDSS'25, NDSS'24",
     },
     {
       title: { ja: "センサ：LiDARセンシング", en: "Sensor: LiDAR Sensing" },
@@ -47,9 +47,9 @@ export const recruit = {
         ja: "LiDARセンサの高性能化・低価格化に伴い、医療やスポーツといった新しいアプリケーションが考えられます。そのような新規センシングアプリ開発を共同研究を通じ実現します。",
         en: "As LiDAR sensors become more capable and affordable, new applications open up in healthcare and sports. We realize these new sensing applications through collaborative research.",
       },
-      sponsors: { ja: "科研費", en: "KAKENHI" },
-      collaborators: { ja: "岡山大学病院 / アイシン / 情報工学科 青木研", en: "Okayama University Hospital / Aisin / Aoki Lab (Keio CS)" },
-      examples: "",
+      sponsors: { ja: "科研費 / JST CRONOS", en: "KAKENHI / JST CRONOS" },
+      collaborators: { ja: "岡山大学病院 / アイシン / 電気情報工学科 青木研 / 情報工学科 五十川研", en: "Okayama University Hospital / Aisin / Aoki Lab (Keio EEE) / Isogawa Lab (Keio CS)" },
+      examples: "CVPR'26, NeurIPS'26",
     },
   ],
   voices: [
@@ -88,10 +88,10 @@ export const recruit = {
       },
     },
     {
-      q: { ja: "配属されると若い期の学生になると思いますが、他の研究室と変わるのでしょうか？", en: "As an early cohort in a young lab, is it different from established labs?" },
+      q: { ja: "配属されると6期生になると思いますが、他の研究室と変わるのでしょうか？", en: "I'd be joining as the 6th cohort — how is that different from an established lab?" },
       a: {
-        ja: "歴史も先輩も少なく、自分で立ち上げないといけないことが多く大変な面もありますが、教員から密接な指導が受けられる、スタートアップに近い環境で研究できるというプラスも多くあります。このような環境にワクワクする方と会えるのを楽しみにしています。",
-        en: "Less history and fewer seniors means more to build yourself — but also close mentoring and a startup-like environment. If that excites you, we'd love to meet you.",
+        ja: "皆さんは6期生になります。まだ歴史の浅い研究室なので、自分で立ち上げることも多いですが、教員から密接な指導が受けられる、スタートアップに近い環境で研究できるというプラスも多くあります。このような環境にワクワクする方と会えるのを楽しみにしています。",
+        en: "You'd be our 6th cohort. As a young lab, there's still a lot to build yourself — but you also get close mentoring and a startup-like environment. If that excites you, we'd love to meet you.",
       },
     },
   ],
