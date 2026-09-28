@@ -344,10 +344,10 @@ export const publications: Publication[] = [
     links: [{ label: "arXiv", href: "https://arxiv.org/abs/2607.14698" }],
   },
   {
-    authors: "K. Oishi, K. Ikeda, R. Hara, R. Yoshida, M. Isogawa, K. Yoshioka",
+    authors: "K. Oishi*, K. Ikeda*, R. Hara, R. Yoshida, M. Isogawa, K. Yoshioka",
     title: "Towards Real-Time Full-Waveform LiDAR Transformers via Intensity-Guided Token Reduction and Physics-Aware Augmentation",
     venue: "NeurIPS", year: 2026, type: "conference", category: "sensing", accRate: "25%",
-    note: "Collaboration with Isogawa Group",
+    note: "* co-first authors · Collaboration with Isogawa Group",
   },
   {
     authors: "R. Yoshida, T. Sato, W. Zhang, Y. Hayakawa, S. Nagai, T. Kado, T. Beppu, K. Yoshioka",
