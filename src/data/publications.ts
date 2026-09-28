@@ -344,9 +344,16 @@ export const publications: Publication[] = [
     links: [{ label: "arXiv", href: "https://arxiv.org/abs/2607.14698" }],
   },
   {
+    authors: "K. Oishi, K. Ikeda, R. Hara, R. Yoshida, M. Isogawa, K. Yoshioka",
+    title: "Towards Real-Time Full-Waveform LiDAR Transformers via Intensity-Guided Token Reduction and Physics-Aware Augmentation",
+    venue: "NeurIPS", year: 2026, type: "conference", category: "sensing", accRate: "25%",
+    note: "Collaboration with Isogawa Group",
+  },
+  {
     authors: "R. Yoshida, T. Sato, W. Zhang, Y. Hayakawa, S. Nagai, T. Kado, T. Beppu, K. Yoshioka",
     title: "Neural Reconstruction of LiDAR Point Clouds under Jamming Attacks via Full-Waveform Representation and Simultaneous Laser Sensing",
-    venue: "arXiv preprint", year: 2026, type: "conference", category: "sensing",
+    venue: "NeurIPS", year: 2026, type: "conference", category: "sensing", accRate: "25%",
+    award: "MIRU Outstanding Student Award",
     links: [{ label: "arXiv", href: "https://arxiv.org/abs/2604.00371" }],
   },
   {
@@ -533,6 +540,9 @@ export interface Award {
 }
 
 export const awards: Award[] = [
+  { date: "2026/9", title: "dlab-VDEC Design Award, Excellence Prize", venue: "dlab Design Forum" },
+  { date: "2026/9", title: "MIRU Outstanding Student Award", paper: "Neural Reconstruction of LiDAR Point Clouds under Jamming Attacks via Full-Waveform Representation and Simultaneous Laser Sensing", venue: "MIRU 2026" },
+  { date: "2026/8", title: "Best Demo Award", paper: "Demo: Controlling Depth Estimation in Stereo Cameras with Projected Patterns", venue: "VehicleSec 2026" },
   { date: "2026/3", title: "Excellent Student Author Award", paper: "BitROM: Weight-Reload-Free CiROM Architecture Towards Billion-Parameter 1.58-bit LLM Inference", venue: "IEICE VLD / ASP-DAC" },
   { date: "2025/10", title: "Best Poster Award", paper: "A High-Speed 8-Bit Single-Channel SAR ADC with Tailored Bit Intervals and Split Capacitors", venue: "IEEE ICCE-Asia 2025" },
   { date: "2025/8", title: "Excellent Reviewer Award", venue: "Symposium on Vehicle Security and Privacy 2025" },
@@ -560,6 +570,24 @@ const roles = {
 } as const;
 
 export const grants: Grant[] = [
+  {
+    title: {
+      ja: "四位一体レーザーによる面的能動空間の創出",
+      en: "Creating actively sensed spaces with a four-in-one laser",
+    },
+    period: "2026.10–2031.3",
+    program: { ja: "JST CRONOS", en: "JST CRONOS" },
+    role: roles.coPI,
+  },
+  {
+    title: {
+      ja: "千里眼：マイクロモビリティ向けインフラ統合型自動運転",
+      en: "Senrigan: infrastructure-integrated autonomous driving for micromobility",
+    },
+    period: "2026.10–2029.3",
+    program: { ja: "JST-NSF VINES", en: "JST-NSF VINES" },
+    role: roles.coPI,
+  },
   {
     title: {
       ja: "アナデジ混載型エッジAI SoC設計技術の研究開発",

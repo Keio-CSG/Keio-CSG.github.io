@@ -233,7 +233,7 @@ const description = ja
               {ja ? "共同研究先" : "With"}
             </span>
             {theme.collaborators.map((c) => (
-              <span class="text-sm text-navy-700">{c}</span>
+              <span class="text-sm text-navy-700">{typeof c === "string" ? c : ja ? c.ja : c.en}</span>
             ))}
           </div>
         )}

@@ -6,7 +6,7 @@ import Icon from "../../components/Icon.astro";
 import ProjectTeaser from "../../components/ProjectTeaser.astro";
 import { site } from "../../data/site";
 import { researchThemes } from "../../data/research";
-import { news, newsTagLabels } from "../../data/news";
+import { news, newsTagLabels, linkLabel } from "../../data/news";
 import { whyCsg } from "../../data/highlights";
 import { categoryOf } from "../../data/projectCategories";
 import { locales, t, type Locale } from "../../i18n/strings";
@@ -31,7 +31,7 @@ const themeVisuals: Record<string, ImageMetadata> = {
 };
 
 const latestNews = news.slice(0, 5);
-const venueHighlights = ["ISSCC", "NDSS", "CVPR", "ICCV", "IROS", "ICRA", "ICCAD", "JSSC", "TVLSI", "ASP-DAC"];
+const venueHighlights = ["ISSCC", "NDSS", "CVPR", "NeurIPS", "ICCV", "IROS", "ICRA", "ICCAD", "JSSC", "TVLSI", "ASP-DAC"];
 
 /** Counters animate from zero, so the value is split into number and suffix. */
 const stats = [
@@ -186,7 +186,7 @@ const description = ja
                     rel="noopener"
                     class="inline-flex items-center gap-1.5 text-xs font-bold text-coral-600 hover:underline"
                   >
-                    {l.label}
+                    {linkLabel(l.label, locale)}
                     <Icon name="external" class="h-3 w-3" />
                   </a>
                 ))}

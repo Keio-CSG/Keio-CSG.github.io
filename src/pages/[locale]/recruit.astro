@@ -101,11 +101,11 @@ const description = ja
             <dl class="mt-6 space-y-2.5 border-t border-navy-900/8 pt-5 text-xs">
               <div>
                 <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "スポンサー" : "Sponsors"}</dt>
-                <dd class="mt-1 text-navy-700">{p.sponsors}</dd>
+                <dd class="mt-1 text-navy-700">{ja ? p.sponsors.ja : p.sponsors.en}</dd>
               </div>
               <div>
                 <dt class="font-bold uppercase tracking-widest text-navy-500">{ja ? "共同研究" : "Collaborators"}</dt>
-                <dd class="mt-1 text-navy-700">{p.collaborators}</dd>
+                <dd class="mt-1 text-navy-700">{ja ? p.collaborators.ja : p.collaborators.en}</dd>
               </div>
               {p.examples && (
                 <div>

@@ -13,7 +13,7 @@ export interface ResearchTheme {
   /** The formal framing, used on homepage cards and meta descriptions. */
   summary: { ja: string; en: string };
   projects: { ja: string; en: string }[];
-  collaborators?: string[];
+  collaborators?: (string | { ja: string; en: string })[];
 }
 
 export const researchThemes: ResearchTheme[] = [
@@ -141,8 +141,8 @@ export const researchThemes: ResearchTheme[] = [
     collaborators: [
       "University of California, Irvine",
       "University of Florida",
-      "早稲田大学",
-      "電気通信大学",
+      { ja: "早稲田大学", en: "Waseda University" },
+      { ja: "電気通信大学", en: "The University of Electro-Communications" },
       "Sony",
     ],
   },
@@ -206,6 +206,10 @@ export const researchThemes: ResearchTheme[] = [
         en: "Repurposing LiDAR as a receiver, delivering traffic-signal and blind-spot information to vehicles",
       },
     ],
-    collaborators: ["岡山大学病院", "株式会社アイシン", "慶應義塾大学 青木研究室"],
+    collaborators: [
+      { ja: "岡山大学病院", en: "Okayama University Hospital" },
+      { ja: "株式会社アイシン", en: "Aisin Corporation" },
+      { ja: "慶應義塾大学 青木研究室", en: "Aoki Lab, Keio University" },
+    ],
   },
 ];
