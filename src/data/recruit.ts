@@ -14,6 +14,14 @@ export const recruit = {
       en: "No reservation needed. About 30 minutes of lab introduction plus 30 minutes chatting with current members. Meet at room 23-214. If none of these times work, email us and we'll arrange a visit.",
     },
   },
+  // The lab introduction deck on Speaker Deck. Swap both values when a new
+  // year's deck goes up; the player id comes from
+  // https://speakerdeck.com/oembed.json?url=<deck url>
+  slides: {
+    title: { ja: "吉岡研究室紹介（2026年度）", en: "Yoshioka Lab introduction (2026)" },
+    url: "https://speakerdeck.com/kentaroy47/yoshioka-kenkyuushitsu-shoukai-2026-nendo",
+    playerId: "f7d6b9b10e7744ddbe141d1440e3cff5",
+  },
   tracks: {
     ja: "吉岡研では「回路」か「センサ」、どちらかの研究テーマに分かれて配属します。どちらのテーマも上下のレイヤ（上はAI・ソフトウェア、下は半導体デバイスやレーザなど）と連携して研究をするため、ハードとソフト両方に興味があることが重要です。プログラミングやAIの知識・経験は必須ではなく、それよりもハードとソフトを両方やってみたいという意志が重要だと考えています。",
     en: "Students join CSG under one of two tracks: Circuit or Sensor. Both tracks span layers from AI/software down to semiconductor devices and lasers, so an interest in both hardware and software matters more than prior expertise. Programming or AI experience isn't required — willingness to tackle both hard and soft elements is.",
