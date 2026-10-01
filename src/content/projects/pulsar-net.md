@@ -6,6 +6,7 @@ year: 2026
 status: accepted
 section: Sensor
 teaser: pulsar-net-teaser.svg
+highlight: true
 order: 2
 authors:
   - name: "R. Yoshida"
