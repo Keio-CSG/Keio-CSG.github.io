@@ -20,8 +20,6 @@ authors:
     me: true
   - name: "T. Kado"
   - name: "T. Beppu"
-  - name: "I. Fujioka"
-  - name: "Y. Zhong"
   - name: "K. Yoshioka"
     me: true
 tags:
