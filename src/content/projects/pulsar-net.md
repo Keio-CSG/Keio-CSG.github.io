@@ -1,11 +1,12 @@
 ---
 title: "Neural Reconstruction of LiDAR Point Clouds under Jamming Attacks via Full-Waveform Representation and Simultaneous Laser Sensing"
 short_title: "PULSAR-Net"
-venue: arXiv
+venue: NeurIPS
 year: 2026
-status: preprint
+status: accepted
 section: Sensor
 teaser: pulsar-net-teaser.svg
+order: 2
 authors:
   - name: "R. Yoshida"
     me: true

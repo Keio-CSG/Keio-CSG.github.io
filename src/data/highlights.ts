@@ -38,7 +38,7 @@ export const whyCsg: Highlight[] = [
       ja: "国際学会での発表を全員が目指します。UC Irvine、フロリダ大、南京大学、東南大学、ソニー、アイシンとの共同研究が動いており、海外からの留学生も在籍しています。",
       en: "Every member aims to present at international venues. We run joint projects with UC Irvine, University of Florida, Nanjing University, Southeast University, Sony, and Aisin — and host visiting students from abroad.",
     },
-    proof: { ja: "CVPR / ICCV / NDSS / IROS / ICRA", en: "CVPR · ICCV · NDSS · IROS · ICRA" },
+    proof: { ja: "NeurIPS / CVPR / ICCV / NDSS / IROS / ICRA", en: "NeurIPS · CVPR · ICCV · NDSS · IROS · ICRA" },
   },
   {
     icon: "sparkle",
