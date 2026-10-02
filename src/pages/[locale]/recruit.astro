@@ -250,6 +250,18 @@ const description = ja
                   <div class="space-y-3">
                     {(ja ? block.body.ja : block.body.en).split("\n").map((para) => <p>{para}</p>)}
                   </div>
+                  {block.link && (
+                    <a
+                      href={block.link.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-coral-300 px-3 py-2 text-xs font-bold text-coral-600 transition-colors hover:bg-sky-300"
+                    >
+                      <Icon name="book" class="h-4 w-4" />
+                      {ja ? block.link.label.ja : block.link.label.en}
+                      <Icon name="external" class="h-3.5 w-3.5" />
+                    </a>
+                  )}
                 </div>
               ))}
             </div>

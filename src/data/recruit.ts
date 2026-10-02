@@ -1,4 +1,5 @@
 import type { ProjectCategory } from "./projectCategories";
+import { zundamonAnalog } from "./tools";
 
 export const recruit = {
   updated: "2026/9/28",
@@ -113,6 +114,7 @@ export const recruit = {
     },
   ],
   // Answers are a list of blocks so the long one keeps its three headed parts.
+  // A block may end with a link to somewhere that goes further.
   // A "\n" in a body starts a new paragraph.
   faq: [
     {
@@ -144,6 +146,10 @@ export const recruit = {
           body: {
             ja: "必要ありません。回路、機械学習、プログラミングの知識は、配属後に研修で勉強します。",
             en: "No. Circuits, machine learning and programming are all covered in training after you join.",
+          },
+          link: {
+            label: { ja: "予習したい人へ：ずんだもんと学ぶアナログ回路", en: "Want a head start? Analog Circuits with Zundamon (in Japanese)" },
+            href: zundamonAnalog.href,
           },
         },
       ],

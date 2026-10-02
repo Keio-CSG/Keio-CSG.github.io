@@ -44,7 +44,8 @@ const year = new Date().getFullYear();
       <h2 class="text-xs font-bold uppercase tracking-widest text-navy-500">{s.footer.contact}</h2>
       <div class="mt-4 space-y-2 text-sm">
         <a href={`mailto:${site.email}`} class="block font-medium text-coral-600 hover:underline">{site.email}</a>
-        <a href={site.socials.github} target="_blank" rel="noopener" class="block text-navy-600 hover:text-navy-900">GitHub</a>
+        <a href={site.socials.labGithub} target="_blank" rel="noopener" class="block text-navy-600 hover:text-navy-900">GitHub (Keio-CSG)</a>
+        <a href={site.socials.github} target="_blank" rel="noopener" class="block text-navy-600 hover:text-navy-900">{locale === "ja" ? "GitHub（吉岡）" : "GitHub (Ken)"}</a>
         <a href={site.socials.kaggle} target="_blank" rel="noopener" class="block text-navy-600 hover:text-navy-900">Kaggle</a>
         <a href={href("/recruit")} class="block text-navy-600 hover:text-navy-900">{s.nav.recruit}</a>
       </div>

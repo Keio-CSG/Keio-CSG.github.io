@@ -5,6 +5,9 @@ import PageHero from "../../../components/PageHero.astro";
 import Icon from "../../../components/Icon.astro";
 import ProjectTeaser from "../../../components/ProjectTeaser.astro";
 import { categoryOf, categoryLabels, type ProjectCategory } from "../../../data/projectCategories";
+import { labTools } from "../../../data/tools";
+import { openSource } from "../../../data/highlights";
+import { site } from "../../../data/site";
 import { locales, t, type Locale } from "../../../i18n/strings";
 
 export function getStaticPaths() {
@@ -67,7 +70,12 @@ const description = ja
     lead={ja
       ? `進行中・発表済みの研究プロジェクト${projects.length}件です。各カードから論文・コード・プロジェクトページに直接アクセスできます。`
       : `${projects.length} ongoing and published projects. Every card links straight to the paper, code, and project page.`}
-  />
+  >
+    <a href="#tools" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-coral-600 hover:underline">
+      <Icon name="github" class="h-4 w-4" />
+      {ja ? "ツール・教材・GitHub のコードはページ下部へ ↓" : "Tools, teaching material and code on GitHub ↓"}
+    </a>
+  </PageHero>
 
   <!-- Filters -->
   <section class="sticky top-16 z-40 border-b border-navy-900/8 bg-paper-100/90 backdrop-blur-xl">
@@ -177,6 +185,72 @@ const description = ja
       {ja ? "該当するプロジェクトがありません。" : "No projects match this filter."}
     </p>
   </div>
+
+  <!-- Tools and teaching material: outside the filters, since they aren't papers. -->
+  <section id="tools" class="scroll-mt-32 border-t border-navy-900/8 bg-paper-200/50">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <p class="text-xs font-bold uppercase tracking-widest text-coral-600">Tools &amp; Teaching</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-navy-900">{ja ? "ツール・教材" : "Tools and teaching material"}</h2>
+      <p class="mt-3 max-w-2xl text-navy-600">
+        {ja ? "論文とは別に、研究コミュニティや学生のためにつくって公開しているものです。" : "Things we build and publish for the research community and for students, beyond the papers."}
+      </p>
+      <div class="mt-9 grid gap-6 md:grid-cols-2">
+        {labTools.map((tool) => (
+          <a
+            href={tool.href}
+            target="_blank"
+            rel="noopener"
+            class="paper-card paper-card-hover group flex gap-5 rounded-2xl border border-navy-900/8 bg-paper-50 p-6 transition-all duration-300 hover:-translate-y-1"
+          >
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-coral-300 text-coral-600">
+              <Icon name={tool.icon} />
+            </span>
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="font-bold tracking-tight text-navy-900 group-hover:text-coral-600">{ja ? tool.name.ja : tool.name.en}</h3>
+                <span class="rounded-full bg-ember-50 px-2.5 py-0.5 text-[11px] font-bold text-ember-600">{ja ? tool.kind.ja : tool.kind.en}</span>
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-navy-600">{ja ? tool.desc.ja : tool.desc.en}</p>
+              <p class="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-coral-600">
+                {ja ? "サイトを開く" : "Visit"}
+                <Icon name="external" class="h-3.5 w-3.5" />
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Source code: the org page holds every repo; a few lead the way. -->
+      <div class="mt-12 flex flex-wrap items-end justify-between gap-4">
+        <h3 class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-navy-900">
+          <Icon name="github" class="h-6 w-6" />
+          {ja ? "GitHub で公開しているコード" : "Code on GitHub"}
+        </h3>
+        <a href={site.socials.labGithub} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm font-bold text-coral-600 hover:underline">
+          {ja ? "Keio-CSG のすべてのリポジトリ" : "All Keio-CSG repositories"}
+          <Icon name="external" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+      <p class="mt-2 max-w-2xl text-sm text-navy-600">
+        {ja ? "論文の実装やデータセット、実験に使っているツールを公開しています。" : "Paper implementations, datasets, and the tools we use in experiments."}
+      </p>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {openSource.map((repo) => (
+          <li>
+            <a
+              href={repo.href}
+              target="_blank"
+              rel="noopener"
+              class="paper-card block h-full rounded-xl border border-navy-900/8 bg-paper-50 px-5 py-4 transition-colors hover:border-coral-500/40"
+            >
+              <span class="font-mono text-sm font-bold text-navy-900">{repo.name}</span>
+              <span class="mt-1 block text-xs leading-relaxed text-navy-600">{ja ? repo.desc.ja : repo.desc.en}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 </Layout>
 
 <script>

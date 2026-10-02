@@ -102,10 +102,12 @@ export const careerOutcomes = [
 
 /** Open-source releases — proof the lab ships, and a way for students to build a public record. */
 export const openSource = [
-  { name: "ASiM", desc: { ja: "SRAMアナログCIMのオープンソースシミュレータ", en: "Open-source simulator for SRAM analog compute-in-memory" }, href: "https://github.com/" },
-  { name: "PACiM", desc: { ja: "確率的近似によるハイブリッドCIMアーキテクチャ", en: "Sparsity-centric hybrid CIM via probabilistic approximation" }, href: "https://github.com/" },
-  { name: "SLAMSpoof", desc: { ja: "LiDAR自己位置推定へのスプーフィング攻撃フレームワーク", en: "Spoofing attack framework against LiDAR localization" }, href: "https://github.com/" },
-  { name: "AHCPTQ", desc: { ja: "Segment Anything Model向け量子化手法", en: "Hardware-compatible post-training quantization for SAM" }, href: "https://github.com/" },
+  { name: "SLAMSpoof", desc: { ja: "LiDAR自己位置推定へのスプーフィング攻撃フレームワーク（ICRA'25）", en: "Spoofing attack framework against LiDAR localization (ICRA'25)" }, href: "https://github.com/Keio-CSG/slamspoof" },
+  { name: "ASiM", desc: { ja: "SRAMアナログCIMの推論精度シミュレータ（TVLSI'25）", en: "Inference-accuracy simulator for SRAM analog compute-in-memory (TVLSI'25)" }, href: "https://github.com/Keio-CSG/ASiM" },
+  { name: "Ghost-FWL", desc: { ja: "フルウェーブフォームLiDARのゴースト除去データセットと実装（CVPR'26）", en: "Full-waveform LiDAR dataset and code for ghost removal (CVPR'26)" }, href: "https://github.com/Keio-CSG/Ghost-FWL" },
+  { name: "PACiM", desc: { ja: "確率的近似によるハイブリッドCIMのシミュレータ（ICCAD'24）", en: "Simulator for sparsity-centric hybrid CIM via probabilistic approximation (ICCAD'24)" }, href: "https://github.com/Keio-CSG/PACiM" },
+  { name: "AHCPTQ", desc: { ja: "Segment Anything Model向けの量子化手法（ICCV'25）", en: "Hardware-compatible post-training quantization for SAM (ICCV'25)" }, href: "https://github.com/Keio-CSG/AHCPTQ" },
+  { name: "LiDAR-Utilities", desc: { ja: "研究室で使うLiDARの使い方とキャプチャ用スクリプト", en: "How-tos and capture scripts for the LiDARs we use" }, href: "https://github.com/Keio-CSG/LiDAR-Utilities" },
 ];
 
 /** Facilities and things the lab physically has — very concrete for visitors. */

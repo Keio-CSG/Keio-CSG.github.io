@@ -25,6 +25,7 @@ export const site = {
     pi: "23-216A",
   },
   socials: {
+    labGithub: "https://github.com/Keio-CSG",
     github: "https://github.com/kentaroy47",
     kaggle: "https://www.kaggle.com/kyoshioka47",
   },
