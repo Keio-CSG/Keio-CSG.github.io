@@ -28,6 +28,7 @@ tags:
   - Security
 links:
   arxiv: https://arxiv.org/abs/2604.00371
+  project: https://keio-csg.github.io/PULSAR_Net_project_page/
 description_ja: "高頻度レーザーパルスでLiDARを完全に盲目にするジャミング攻撃に対する世界初の有効な防御手法PULSAR-Netを提案。通常廃棄される中間フルウェーブフォームデータと同時マルチレーザーセンシングの空間時間相関を活用し、軸方向アテンション付きU-Netで攻撃パルスを正当反射から分離する。合成データのみで訓練しながら、実世界の静止・走行シナリオで92%・73%の点群再構成率を達成した。"
 ---
 

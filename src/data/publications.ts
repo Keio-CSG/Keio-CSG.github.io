@@ -358,7 +358,10 @@ export const publications: Publication[] = [
     title: "Neural Reconstruction of LiDAR Point Clouds under Jamming Attacks via Full-Waveform Representation and Simultaneous Laser Sensing",
     venue: "NeurIPS", year: 2026, type: "conference", category: "sensing", accRate: "25%",
     award: "MIRU Outstanding Student Award",
-    links: [{ label: "arXiv", href: "https://arxiv.org/abs/2604.00371" }],
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2604.00371" },
+      { label: "Project", href: "https://keio-csg.github.io/PULSAR_Net_project_page/" },
+    ],
   },
   {
     authors: "T. Ishizue, N. Costagliola, S. Varma, O. Sako, K. Yoshioka, T. Sugawara, S. Rampazzi",
