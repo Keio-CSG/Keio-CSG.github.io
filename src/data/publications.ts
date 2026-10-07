@@ -341,7 +341,10 @@ export const publications: Publication[] = [
     authors: "M. Watanabe, T. Sato, K. Yoshioka",
     title: "Lights, Camera, Malfunction: When Illumination Robustness Leaves VLA Models Blind to Color",
     venue: "CoRL", year: 2026, type: "conference", category: "sensing", accRate: "33%",
-    links: [{ label: "arXiv", href: "https://arxiv.org/abs/2607.14698" }],
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2607.14698" },
+      { label: "Project", href: "https://keio-csg.github.io/ChromaGuard/" },
+    ],
   },
   {
     authors: "K. Oishi*, K. Ikeda*, R. Hara, R. Yoshida, M. Isogawa, K. Yoshioka",
