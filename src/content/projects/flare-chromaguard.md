@@ -19,6 +19,7 @@ tags:
   - Transformer
 links:
   arxiv: https://arxiv.org/abs/2607.14698
+  project: https://keio-csg.github.io/ChromaGuard/
 description_ja: "ロボット操作の汎用基盤となりつつある Vision-Language-Action (VLA) モデルが、照明のわずかな変化に脆いことを示した研究。狙った照射で成功率をゼロまで落とす物理スポットライト攻撃 FLARE を提案し、モデル内部へのアクセスなしに成立することを実証した。さらに標準的な対策である素朴なデータ拡張が、モデルに「色をノイズとして捨てる」ことを学習させ、形状だけに頼る知覚へ退化させてしまう落とし穴を発見。色を保持したまま敵対的学習を行う ChromaGuard により、実機6自由度ロボットで通常時97.5%、攻撃下92.5%の成功率を達成した。"
 order: 4
 ---
