@@ -131,7 +131,9 @@ const links = [
       <p class="pt-1">{site.address.postal}</p>
       <p>{locale === "ja" ? site.address.ja : site.address.en}</p>
       <p class="pt-1 text-navy-500">
-        {locale === "ja" ? "学生居室" : "Students"}: {site.rooms.students} ／ PI: {site.rooms.pi}
+        {locale === "ja"
+          ? `学生居室: ${site.rooms.students} ／ 教員室: ${site.rooms.pi}`
+          : `Students: ${site.rooms.students} / PI: ${site.rooms.pi}`}
       </p>
     </div>
 

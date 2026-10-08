@@ -64,8 +64,8 @@ export const whyCsg: Highlight[] = [
     art: "resources",
     title: { ja: "研究費に、困らない", en: "You won't lack resources" },
     body: {
-      ja: "JST CREST 2件、JSTさきがけ、JST ASPIRE、次世代エッジAI事業、科研費基盤Bなど、大型予算を複数獲得しています。試作費も学会渡航費も心配なく研究に集中できます。",
-      en: "We hold multiple large grants — two JST CREST projects, JST PRESTO, JST ASPIRE, the Next-Gen Edge AI program, and KAKENHI (B). Fabrication and conference travel are covered so you can focus on research.",
+      ja: "JST CREST 2件、JST CRONOS、JST-NSF VINES、JST ASPIRE、次世代エッジAI半導体研究開発事業、科研費基盤Bなど、大型予算を複数獲得しています。試作費も学会渡航費も心配なく研究に集中できます。",
+      en: "We hold multiple large grants — two JST CREST projects, JST CRONOS, JST-NSF VINES, JST ASPIRE, the Next-Generation Edge AI Semiconductor program, and KAKENHI (B). Fabrication and conference travel are covered so you can focus on research.",
     },
   },
 ];
@@ -78,6 +78,7 @@ export interface StudentAward {
 }
 
 export const studentAwards: StudentAward[] = [
+  { year: "2026", name: { ja: "松野", en: "Ryoya Matsuno" }, award: { ja: "dlab-VDECデザインアワード優秀賞", en: "dlab-VDEC Design Award, Excellence Prize" } },
   { year: "2026", name: { ja: "吉田", en: "Ryo Yoshida" }, award: { ja: "MIRU優秀学生賞", en: "MIRU Outstanding Student Award" } },
   { year: "2026", name: { ja: "佐古", en: "Ozora Sako" }, award: { ja: "VehicleSec Best Demo Award", en: "VehicleSec Best Demo Award" } },
   { year: "2026", name: { ja: "張", en: "Wenlun Zhang" }, award: { ja: "ASP-DAC Excellent Student Author Award", en: "ASP-DAC Excellent Student Author Award" } },
@@ -94,7 +95,7 @@ export const careerOutcomes = [
   { destination: "Princeton University (Ph.D.)", kind: "academia" },
   { destination: "Sony", kind: "industry" },
   { destination: "Sony Semiconductor Solutions", kind: "industry" },
-  { destination: "Nissan Motors", kind: "industry" },
+  { destination: "Nissan Motor", kind: "industry" },
   { destination: "AWS", kind: "industry" },
   { destination: "Sansan", kind: "industry" },
   { destination: "Daihen", kind: "industry" },

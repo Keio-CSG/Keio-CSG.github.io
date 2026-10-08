@@ -50,7 +50,7 @@ export const recruit = {
         ja: "自動運転に不可欠なLiDARセンサは多く使われていますが、そのセキュリティ性質はあまり調べられていません。吉岡研ではLiDARセンサの脆弱性発見や自動運転車における脅威を調査し、解決策を提案する研究を行っています。攻撃装置の構築のほか、実際にLiDARを設計したり試験用の自動運転車を走行させたりしている、世界でも数少ない研究室です。",
         en: "LiDAR sensors are essential to autonomous driving, yet their security is rarely studied. We uncover LiDAR vulnerabilities and threats to autonomous vehicles and propose defenses — one of the few labs worldwide that builds attack rigs, designs real LiDARs, and drives actual test vehicles.",
       },
-      sponsors: { ja: "JST CREST / JST さきがけ / 科研費 他", en: "JST CREST / JST PRESTO / KAKENHI and others" },
+      sponsors: { ja: "JST CREST / JST-NSF VINES / 科研費 他", en: "JST CREST / JST-NSF VINES / KAKENHI and others" },
       collaborators: { ja: "University of California, Irvine / University of Florida / 早稲田大学 / 電気通信大学 / ソニー", en: "University of California, Irvine / University of Florida / Waseda University / UEC / Sony" },
       examples: "ACM CCS'26, NeurIPS'26, IROS'26, VehicleSec'26, RA-L'25, ICRA'25, NDSS'25, NDSS'24",
     },

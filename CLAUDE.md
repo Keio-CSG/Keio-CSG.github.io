@@ -44,7 +44,7 @@ npx astro dev logs      # ログ
 
 ### ニュースを追加する
 
-`src/data/news.ts` の配列**先頭**に追加。トップページは上位6件、`/news` は年別に全件表示する。
+`src/data/news.ts` の配列**先頭**に追加。トップページは上位5件、`/news` は年別に全件表示する。
 
 ```ts
 { date: "2026-09", tag: "paper", ja: "◯◯くんの論文が△△に採択されました！", en: "..." },
@@ -254,7 +254,7 @@ B3・新M1 の獲得を意識して、実績の羅列ではなく「ここに来
 
 ```
 src/
-  content/projects/   プロジェクト .md（19件）← ここに置くだけで増える
+  content/projects/   プロジェクト .md（21件）← ここに置くだけで増える
   content.config.ts   コレクションのスキーマ定義
   data/               コンテンツデータ層（下表）
   i18n/strings.ts     UI 文言
@@ -271,7 +271,7 @@ figs/                 イラスト原本（サイトからは直接参照しな�
 |---|---|
 | `site.ts` | 研究室名・住所・連絡先・居室番号 |
 | `research.ts` | 研究3テーマ |
-| `publications.ts` | 論文78件 + 受賞・競争的資金・メディア掲載・特許 |
+| `publications.ts` | 論文82件 + 受賞・競争的資金・メディア掲載・特許 |
 | `members.ts` | メンバー・卒業生 |
 | `photos.ts` | メンバー写真の import と名前→画像のマップ |
 | `recruit.ts` | 説明会日程・研究トラック・文化・先輩の声・FAQ |

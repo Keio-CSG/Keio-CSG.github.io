@@ -1,5 +1,5 @@
 ---
-title: "LiDAR Beacon: A Long-Range LiDAR Fiducial Marker for GPS-Free Autonomous Localization of Construction Machinery"
+title: "LiDAR Beacon: 300 m-Range Fiducial Marker for Mobile Robot Localization with Dual Temporal Range–Reflectance Modulation"
 short_title: "LiDAR Beacon"
 venue: Sensors J.
 year: 2026
@@ -10,6 +10,12 @@ authors:
   - name: "O. Sako"
     me: true
   - name: "K. Koide"
+  - name: "R. Nagata"
+    me: true
+  - name: "K. Ikeda"
+    me: true
+  - name: "R. Yoshida"
+    me: true
   - name: "K. Yoshioka"
     me: true
 tags:

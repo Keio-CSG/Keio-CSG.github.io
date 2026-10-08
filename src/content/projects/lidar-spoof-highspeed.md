@@ -20,6 +20,8 @@ authors:
     me: true
   - name: "R. Nagata"
     me: true
+  - name: "R. Yoshida"
+    me: true
   - name: "Q. Chen"
   - name: "K. Yoshioka"
     me: true

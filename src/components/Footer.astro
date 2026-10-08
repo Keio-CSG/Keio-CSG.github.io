@@ -32,8 +32,8 @@ const year = new Date().getFullYear();
       <address class="mt-4 space-y-1 text-sm not-italic leading-relaxed text-navy-600">
         <p>{site.address.postal}</p>
         <p>{locale === "ja" ? site.address.ja : site.address.en}</p>
-        <p class="pt-2 text-navy-500">Students: {site.rooms.students}</p>
-        <p class="text-navy-500">PI: {site.rooms.pi}</p>
+        <p class="pt-2 text-navy-500">{locale === "ja" ? "学生居室" : "Students"}: {site.rooms.students}</p>
+        <p class="text-navy-500">{locale === "ja" ? "教員室" : "PI"}: {site.rooms.pi}</p>
       </address>
       <a href={site.mapUrl} target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-medium text-coral-600 hover:underline">
         {locale === "ja" ? "矢上キャンパスへのアクセス →" : "Access to Yagami Campus →"}
