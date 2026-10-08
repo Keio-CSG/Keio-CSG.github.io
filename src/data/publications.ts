@@ -547,6 +547,33 @@ export interface Award {
   venue: string;
 }
 
+/**
+ * Conferences counted as "top" for the homepage stat: the ones the Papers page
+ * already names as top venues, plus their peers in the same fields. Matched
+ * against the start of `venue` once an "IEEE " prefix is dropped.
+ */
+const topConferenceVenues = [
+  "ISSCC",
+  "Symposium on VLSI Circuits",
+  "NeurIPS",
+  "CVPR",
+  "ICCV",
+  "CoRL",
+  "IROS",
+  "ICRA",
+  "NDSS",
+  "ACM CCS",
+];
+
+/** Main-track papers only: posters and CVPR Findings don't count. */
+export const isTopConferencePaper = (p: Publication) => {
+  if (p.type !== "conference" || /Poster|Findings/.test(p.venue)) return false;
+  const venue = p.venue.replace(/^IEEE /, "");
+  return topConferenceVenues.some((v) => venue.startsWith(v));
+};
+
+export const topConferencePaperCount = publications.filter(isTopConferencePaper).length;
+
 export const awards: Award[] = [
   { date: "2026/9", title: "dlab-VDEC Design Award, Excellence Prize", venue: "dlab Design Forum" },
   { date: "2026/9", title: "MIRU Outstanding Student Award", paper: "Neural Reconstruction of LiDAR Point Clouds under Jamming Attacks via Full-Waveform Representation and Simultaneous Laser Sensing", venue: "MIRU 2026" },

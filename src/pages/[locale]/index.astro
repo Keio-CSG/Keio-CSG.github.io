@@ -9,6 +9,7 @@ import { researchThemes } from "../../data/research";
 import { news, newsTagLabels, linkLabel } from "../../data/news";
 import { whyCsg } from "../../data/highlights";
 import { categoryOf } from "../../data/projectCategories";
+import { topConferencePaperCount } from "../../data/publications";
 import { locales, t, type Locale } from "../../i18n/strings";
 import mainVisual from "../../assets/main.webp";
 import edgeVisual from "../../assets/edge.webp";
@@ -36,7 +37,7 @@ const venueHighlights = ["ISSCC", "NDSS", "CVPR", "NeurIPS", "ICCV", "IROS", "IC
 /** Counters animate from zero, so the value is split into number and suffix. */
 const stats = [
   { to: 80, suffix: "+", label: ja ? "発表論文" : "Publications" },
-  { to: 30, suffix: "+", label: ja ? "特許出願・登録" : "Patents" },
+  { to: topConferencePaperCount, suffix: "", label: ja ? "トップ会議論文" : "Top-conference papers" },
   { to: 9, suffix: "", label: ja ? "JSSC 論文" : "JSSC papers" },
   { to: 5, suffix: "", label: ja ? "ISSCC 論文" : "ISSCC papers" },
 ];
