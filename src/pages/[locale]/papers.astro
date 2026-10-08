@@ -268,7 +268,13 @@ const description = ja
               </span>
               {m.date && <span class="font-mono text-xs text-navy-500">{m.date}</span>}
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-navy-700">{m.title}</p>
+            <p class="mt-2 text-sm leading-relaxed text-navy-700" lang={/[\u3040-\u30ff\u4e00-\u9fff]/.test(m.title) ? "ja" : "en"}>
+              {m.href ? (
+                <a href={m.href} target="_blank" rel="noopener" class="hover:text-coral-600 hover:underline">{m.title}</a>
+              ) : (
+                m.title
+              )}
+            </p>
           </li>
         ))}
       </ul>
