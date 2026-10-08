@@ -51,6 +51,7 @@ const links = [
     <div class="flex items-center gap-2">
       <a
         href={altHref}
+        data-locale-switch={other}
         class="rounded-lg border border-navy-900/12 px-2.5 py-1.5 text-xs font-semibold text-navy-700 transition-colors hover:border-coral-400 hover:text-coral-600"
       >
         {s.common.langSwitch}
@@ -167,6 +168,18 @@ const links = [
       toggle?.setAttribute("aria-expanded", "false");
       toggle?.focus();
     }
+  });
+
+  // Remember an explicit language choice so the site root (pages/index.astro)
+  // sends this visitor back to it instead of guessing from the browser.
+  document.querySelectorAll<HTMLElement>("[data-locale-switch]").forEach((link) => {
+    link.addEventListener("click", () => {
+      try {
+        localStorage.setItem("csg-locale", link.dataset.localeSwitch ?? "");
+      } catch {
+        // Storage can be blocked; the root then falls back to the browser language.
+      }
+    });
   });
 
   const dialog = document.getElementById("contact-dialog") as HTMLDialogElement | null;

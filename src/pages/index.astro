@@ -1,30 +1,49 @@
 ---
 /**
  * GitHub Pages serves static files only, so the site root can't issue a 301.
- * A meta refresh stands in, but the page still carries a canonical and the full
- * hreflang set so search engines index the Japanese page rather than this stub.
+ * A script picks the language instead: the one the visitor last chose with the
+ * header's language switch, else the first of ja/en in navigator.languages,
+ * else English. Without JavaScript a meta refresh falls back to Japanese.
+ *
+ * Because this page redirects by language, it is the hreflang x-default for
+ * the homepage (Layout points the /ja and /en homepages' x-default here too),
+ * and carries no canonical of its own.
  */
 import { site } from "../data/site";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const abs = (p: string) => new URL(`${base}${p}`, Astro.site).href;
-const target = abs("/ja");
+// Root-relative, so dev, preview and any mirror stay on their own host.
+const targets = { ja: `${base}/ja/`, en: `${base}/en/` };
+const abs = (p: string) => new URL(p, Astro.site).href;
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <script is:inline define:vars={{ targets }}>
+      var locale;
+      try { locale = localStorage.getItem("csg-locale"); } catch (e) {}
+      if (!targets[locale]) {
+        locale = "en";
+        var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+        for (var i = 0; i < langs.length; i++) {
+          var l = String(langs[i]).toLowerCase();
+          if (l.indexOf("ja") === 0) { locale = "ja"; break; }
+          if (l.indexOf("en") === 0) break;
+        }
+      }
+      location.replace(targets[locale] + location.search + location.hash);
+    </script>
+    <noscript><meta http-equiv="refresh" content={`0; url=${targets.ja}`} /></noscript>
     <title>{site.titleJa}</title>
     <meta name="description" content={site.tagline.ja} />
-    <link rel="canonical" href={target} />
-    <link rel="alternate" hreflang="ja" href={target} />
-    <link rel="alternate" hreflang="en" href={abs("/en")} />
-    <link rel="alternate" hreflang="x-default" href={target} />
+    <link rel="alternate" hreflang="ja" href={abs(`${base}/ja`)} />
+    <link rel="alternate" hreflang="en" href={abs(`${base}/en`)} />
+    <link rel="alternate" hreflang="x-default" href={abs(`${base}/`)} />
     <link rel="icon" href={`${base}/csg.png`} type="image/png" />
   </head>
   <body>
-    <p><a href={target}>{site.titleJa}</a></p>
+    <p><a href={targets.ja}>{site.titleJa}</a> / <a href={targets.en} lang="en">{site.titleEn}</a></p>
   </body>
 </html>

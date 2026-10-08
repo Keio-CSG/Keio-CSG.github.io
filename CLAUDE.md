@@ -232,7 +232,10 @@ B3・新M1 の獲得を意識して、実績の羅列ではなく「ここに来
 
 - `/ja/...`（既定）と `/en/...`
 - ページは `src/pages/[locale]/*.astro`。各ページの `getStaticPaths()` が `locales` を回す
-- `src/pages/index.astro` はルートから `/ja` への meta refresh リダイレクト
+- `src/pages/index.astro` はルートから言語別に振り分ける JS リダイレクト。ヘッダーの言語切替で
+  選んだ言語（`localStorage` の `csg-locale`）→ ブラウザの言語設定（`ja` / `en` のうち先に
+  出てくる方。どちらもなければ英語）の順で決める。JS 無効時は meta refresh で `/ja`。
+  トップページの hreflang `x-default` はこのルートを指す（他のページは `/ja`）
 - ヘッダーの言語切替は**現在のページの対応する言語版**にリンクする（`Layout` に渡す `path` を使う）
 
 **文言の置き場所の使い分け:**

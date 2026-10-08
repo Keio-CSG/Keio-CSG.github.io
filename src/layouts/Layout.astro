@@ -18,8 +18,12 @@ const siteName = locale === "ja" ? site.titleJa : site.titleEn;
 const fullTitle = path === "" ? siteName : `${title} | ${site.shortName}`;
 const canonical = new URL(`${base}/${locale}${path}`, Astro.site);
 const alt = new URL(`${base}/${otherLocale(locale)}${path}`, Astro.site);
-/** Japanese is the default locale, so it answers for unmatched languages. */
-const defaultHref = new URL(`${base}/ja${path}`, Astro.site).href;
+/**
+ * Japanese is the default locale, so it answers for unmatched languages. The
+ * homepage is the exception: the site root picks a language per visitor, so it
+ * is the x-default there (see pages/index.astro).
+ */
+const defaultHref = new URL(path === "" ? `${base}/` : `${base}/ja${path}`, Astro.site).href;
 
 const jsonLd = {
   "@context": "https://schema.org",
