@@ -1,6 +1,6 @@
 ---
-title: "Basket LiDAR: 3D Basketball Player Tracking via LiDAR Sensing"
-short_title: "Basket LiDAR"
+title: "BasketLiDAR: The First LiDAR-Camera Multimodal Dataset for Professional Basketball MOT"
+short_title: "BasketLiDAR"
 venue: MMSports
 year: 2025
 status: published

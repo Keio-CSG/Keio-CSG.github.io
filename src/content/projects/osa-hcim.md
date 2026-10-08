@@ -8,7 +8,7 @@ section: Circuit
 description_ja: "オンザフライ顕著性検出と動的精度設定を備えたハイブリッドSRAMコンピュートインメモリマクロ。非顕著な活性化をスキップしつつ適応的なビット幅選択で精度を維持する。エッジデバイスでの高効率・高精度推論の両立を実現する新しい設計手法を提案する。"
 teaser: osa-hcim-teaser.svg
 authors:
-  - name: "Y.C. Chen"
+  - name: "Y.-C. Chen"
     me: true
   - name: "S. Ando"
     me: true

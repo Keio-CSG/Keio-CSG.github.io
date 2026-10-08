@@ -31,10 +31,13 @@ const categoryLabels: Record<string, { ja: string; en: string }> = {
 const typeLabels: Record<string, { ja: string; en: string }> = {
   journal: { ja: "論文誌", en: "Journal" },
   conference: { ja: "国際会議", en: "Conference" },
+  domestic: { ja: "国内発表", en: "Domestic" },
 };
 
 const sorted = [...publications].sort((a, b) => b.year - a.year);
 const byType = (type: string) => sorted.filter((p) => p.type === type);
+/** Only the types that have papers, so an empty "domestic" section never shows. */
+const types = Object.keys(typeLabels).filter((type) => byType(type).length > 0);
 
 const years = [...new Set(publications.map((p) => p.year))].sort((a, b) => b - a);
 const awardCount = publications.filter((p) => p.award).length;
@@ -54,8 +57,8 @@ const kinds = [
 ];
 
 const description = ja
-  ? "CSGの発表論文一覧。ISSCC・JSSC・NeurIPS・NDSS・CVPR・ICCV・IROS・ICRAなどのトップ会議・論文誌に50報以上を発表しています。"
-  : "Publications from CSG — over 50 papers at top venues including ISSCC, JSSC, NeurIPS, NDSS, CVPR, ICCV, IROS, and ICRA.";
+  ? "CSGの発表論文一覧。ISSCC・JSSC・NeurIPS・NDSS・CVPR・ICCV・IROS・ICRAなどのトップ会議・論文誌に80報以上を発表しています。"
+  : "Publications from CSG — over 80 papers at top venues including ISSCC, JSSC, NeurIPS, NDSS, CVPR, ICCV, IROS, and ICRA.";
 ---
 
 <Layout locale={locale} path="/papers" title={ja ? "発表論文" : "Papers"} description={description}>
@@ -63,8 +66,8 @@ const description = ja
     eyebrow="Papers"
     title={ja ? "発表論文" : "Publications"}
     lead={ja
-      ? "集積回路のトップ会議ISSCCに5報、トップ論文誌JSSCに9報を含む計50報以上を発表。セキュリティ、AI、ロボティクス、医療画像解析のトップ会議でも成果を発表しています。特許も30件以上出願・登録しています。"
-      : "Over 50 papers, including 5 at ISSCC and 9 in JSSC — the top conference and journal in integrated circuits. We also publish at top venues in security, AI, robotics, and medical image analysis, and hold over 30 patents."}
+      ? "集積回路のトップ会議ISSCCに5報、トップ論文誌JSSCに9報を含む計80報以上を発表。セキュリティ、AI、ロボティクス、医療画像解析のトップ会議でも成果を発表しています。特許も30件以上出願・登録しています。"
+      : "Over 80 papers, including 5 at ISSCC and 9 in JSSC — the top conference and journal in integrated circuits. We also publish at top venues in security, AI, robotics, and medical image analysis, and hold over 30 patents."}
   />
 
   <!-- Kind picks the sections shown; category and year then refine the papers. -->
@@ -114,9 +117,9 @@ const description = ja
             class="rounded-full border border-navy-900/12 bg-paper-50 px-3 py-1.5 text-xs font-bold text-navy-700"
           >
             <option value="all">{ja ? "すべて" : "All"}</option>
-            {Object.entries(typeLabels).map(([key, label]) => (
+            {types.map((key) => (
               <option value={key}>
-                {ja ? `${label.ja}（${byType(key).length}）` : `${label.en} (${byType(key).length})`}
+                {ja ? `${typeLabels[key].ja}（${byType(key).length}）` : `${typeLabels[key].en} (${byType(key).length})`}
               </option>
             ))}
           </select>
@@ -143,7 +146,7 @@ const description = ja
   </p>
 
   <div class="mx-auto max-w-6xl px-5 py-16 md:py-20">
-    {["journal", "conference"].map((type) => (
+    {types.map((type) => (
       <section class="kind-section pub-section mb-16" data-kind="papers">
         <h2 class="text-2xl font-bold tracking-tight text-navy-900">
           {ja ? typeLabels[type].ja : typeLabels[type].en}
@@ -248,7 +251,7 @@ const description = ja
       </h3>
       <ul class="mt-4 flex flex-wrap gap-2">
         {sponsors.map((sp) => (
-          <li class="rounded-full bg-paper-300/70 px-3.5 py-1.5 text-sm font-medium text-navy-800">{sp}</li>
+          <li class="rounded-full bg-paper-300/70 px-3.5 py-1.5 text-sm font-medium text-navy-800">{ja ? sp.ja : sp.en}</li>
         ))}
       </ul>
     </section>
@@ -260,7 +263,9 @@ const description = ja
         {mediaCoverage.map((m) => (
           <li class="paper-card rounded-2xl bg-paper-50 p-5">
             <div class="flex items-baseline gap-3">
-              <span class="text-xs font-bold text-coral-600">{m.outlet}</span>
+              <span class="text-xs font-bold text-coral-600">
+                {typeof m.outlet === "string" ? m.outlet : ja ? m.outlet.ja : m.outlet.en}
+              </span>
               {m.date && <span class="font-mono text-xs text-navy-500">{m.date}</span>}
             </div>
             <p class="mt-2 text-sm leading-relaxed text-navy-700">{m.title}</p>

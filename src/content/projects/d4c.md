@@ -3,7 +3,7 @@ title: "D4C: Data-Free Quantization for Contrastive Language-Image Pre-training 
 short_title: "D4C"
 venue: CVPR Findings
 year: 2026
-status: accepted
+status: published
 section: Circuit
 teaser: d4c-teaser.svg
 authors:
@@ -11,6 +11,7 @@ authors:
     me: true
   - name: "Y. Zhong"
   - name: "Z. Ding"
+    me: true
   - name: "X. Li"
     me: true
   - name: "K. Yoshioka"

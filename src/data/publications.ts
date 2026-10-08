@@ -50,6 +50,7 @@ export const publications: Publication[] = [
     title: "A 818-4094 TOPS/W Capacitor-Reconfigured Analog CIM for Unified Acceleration of CNNs and Transformers",
     venue: "IEEE Journal of Solid-State Circuits",
     year: 2024, type: "journal", category: "computing",
+    links: [{ label: "Paper", href: "https://ieeexplore.ieee.org/document/10689660" }],
   },
   {
     authors: "Y. Toyama, K. Yoshioka, K. Ban, S. Maya, A. Sai, K. Onizuka",
@@ -116,7 +117,7 @@ export const publications: Publication[] = [
   },
   {
     authors: "K. Yoshioka et al.",
-    title: "A 20-ch TDC/ADC Hybrid Architecture LiDAR SoC for 24096 Pixel 200-m Range Imaging With Smart Accumulation Technique and Residue Quantizing SAR ADC",
+    title: "A 20-ch TDC/ADC Hybrid Architecture LiDAR SoC for 240×96 Pixel 200-m Range Imaging With Smart Accumulation Technique and Residue Quantizing SAR ADC",
     venue: "IEEE Journal of Solid-State Circuits, Vol. 53, Issue 11, pp.3026-3038",
     year: 2018, type: "journal", category: "sensing",
   },
@@ -170,7 +171,7 @@ export const publications: Publication[] = [
   {
     authors: "S. Kawai, K. Yoshioka et al.",
     title: "An 802.11ax 4×4 Spectrum-Efficient WLAN AP Transceiver SoC Supporting 1024QAM with Frequency-Dependent IQ Calibration and Integrated Interference Analyzer",
-    venue: "IEEE Journal of Solid-State Circuits, Vol. 53, Issue 11, pp.442-444",
+    venue: "IEEE Journal of Solid-State Circuits",
     year: 2018, type: "journal", category: "analog",
   },
   {
@@ -308,7 +309,7 @@ export const publications: Publication[] = [
     authors: "K. Yoshioka",
     title: "A 818-4094 TOPS/W Capacitor-Reconfigured CIM Macro for Unified Acceleration of CNNs and Transformers",
     venue: "ISSCC", year: 2024, type: "conference", category: "computing", accRate: "26%",
-    links: [{ label: "Paper", href: "https://ieeexplore.ieee.org/document/10689660" }, { label: "Press", href: "https://www.jst.go.jp/pr/announce/20240219/" }],
+    links: [{ label: "Press", href: "https://www.jst.go.jp/pr/announce/20240219/" }],
   },
   {
     authors: "Y.-C. Chen, S. Ando, D. Fujiki, S. Takamaeda-Yamazaki, K. Yoshioka",
@@ -480,7 +481,7 @@ export const publications: Publication[] = [
   {
     authors: "K. Yoshioka et al.",
     title: "A 20ch TDC/ADC Hybrid SoC for 240×96-pixel 10%-reflection <0.125%-precision 200m-range Imaging LiDAR with Smart Accumulation Technique",
-    venue: "ISSCC, pp.3026-3038", year: 2018, type: "conference", category: "sensing", accRate: "33%",
+    venue: "ISSCC", year: 2018, type: "conference", category: "sensing", accRate: "33%",
   },
 
   // ---- International conferences: Analog ----
@@ -508,7 +509,7 @@ export const publications: Publication[] = [
   {
     authors: "K. Yoshioka, R. Saito, T. Danjo, S. Tsukamoto, H. Ishikuro",
     title: "7-bit 0.8–1.2 GS/s Dynamic Architecture and Frequency Scaling Subrange ADC with Binary-Search/Flash Live Configuring Technique",
-    venue: "IEEE Symposium on VLSI Circuits, pp.932-945", year: 2014, type: "conference", category: "analog", accRate: "22%",
+    venue: "IEEE Symposium on VLSI Circuits", year: 2014, type: "conference", category: "analog", accRate: "22%",
   },
   {
     authors: "K. Yoshioka, H. Ishikuro",
@@ -669,19 +670,19 @@ export const grants: Grant[] = [
   },
 ];
 
-export const sponsors = [
-  "株式会社アイシン (Aisin Corp.)",
-  "ソニーセミコンダクタソリューションズ株式会社 (Sony Semiconductor Solutions)",
-  "TSMC",
+export const sponsors: { ja: string; en: string }[] = [
+  { ja: "株式会社アイシン", en: "Aisin Corporation" },
+  { ja: "ソニーセミコンダクタソリューションズ株式会社", en: "Sony Semiconductor Solutions" },
+  { ja: "TSMC", en: "TSMC" },
 ];
 
 export const mediaCoverage = [
-  { outlet: "自動運転ラボ", title: "慶応の学生ら、走行中の自動運転センサーを無効化　「脆弱性」を発見", date: "2025/03" },
+  { outlet: { ja: "自動運転ラボ", en: "Jidounten Lab" }, title: "慶応の学生ら、走行中の自動運転センサーを無効化　「脆弱性」を発見", date: "2025/03" },
   { outlet: "GIZMODO", title: "自動運転車のセンサー、遠距離からの攻撃で無効化できちゃうかも", date: "2025/02" },
-  { outlet: "日経クロステック", title: "AI推論の新半導体が続々、電力効率改善へ注目3選", date: "2024/03" },
+  { outlet: { ja: "日経クロステック", en: "Nikkei xTECH" }, title: "AI推論の新半導体が続々、電力効率改善へ注目3選", date: "2024/03" },
   { outlet: "Tech Xplore", title: "Autonomous vehicle technology vulnerable to road object spoofing and vanishing attacks", date: "2024/03" },
   { outlet: "PC Watch", title: "ISSCC 2024の発表論文数から見る、日の丸半導体復活への兆し", date: "2024/02" },
-  { outlet: "日経クロステック", title: "自動運転用LiDARに脆弱性、慶応大らがHFR攻撃で物体消失を確認", date: "2024/02" },
+  { outlet: { ja: "日経クロステック", en: "Nikkei xTECH" }, title: "自動運転用LiDARに脆弱性、慶応大らがHFR攻撃で物体消失を確認", date: "2024/02" },
   { outlet: "EE Times", title: "アナログCIM回路でCNNとTransformerの処理を実現", date: "2024/02" },
   { outlet: "IEEE Spectrum", title: "Toshiba's Light Sensor Paves the Way for Cheap Lidar", date: "" },
   { outlet: "Google AI Blog", title: "An International Scientific Challenge for the Diagnosis and Gleason Grading of Prostate Cancer", date: "" },

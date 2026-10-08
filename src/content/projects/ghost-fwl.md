@@ -3,7 +3,7 @@ title: "Ghost-FWL: A Large-Scale Full-Waveform LiDAR Dataset for Ghost Detection
 short_title: "Ghost-FWL"
 venue: CVPR
 year: 2026
-status: accepted
+status: published
 highlight: true
 section: Sensor
 teaser: ghost-fwl-teaser.svg
@@ -17,6 +17,7 @@ authors:
   - name: "O. Sako"
     me: true
   - name: "Z. Ding"
+    me: true
   - name: "T. Kado"
     me: true
   - name: "I. Fujioka"

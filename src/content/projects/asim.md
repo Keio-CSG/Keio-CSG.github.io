@@ -11,7 +11,7 @@ authors:
     me: true
   - name: "S. Ando"
     me: true
-  - name: "Y.C. Chen"
+  - name: "Y.-C. Chen"
     me: true
   - name: "K. Yoshioka"
     me: true

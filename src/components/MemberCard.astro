@@ -9,7 +9,10 @@ interface Props {
 }
 
 const { member } = Astro.props;
+const ja = Astro.params.locale !== "en";
 const photo = memberPhotos[member.name];
+/** Comments are written in the member's own words, usually Japanese; mark them so on English pages. */
+const commentLang = member.comment && /[\u3040-\u30ff\u4e00-\u9fff]/.test(member.comment) ? "ja" : "en";
 
 /** Deterministic warm tint so the fallback initial avatars form a coherent set. */
 const tints = [
@@ -53,25 +56,28 @@ const initials = member.name
 
   <h3 class="mt-4 text-sm font-bold leading-snug tracking-tight text-navy-900">{member.name}</h3>
   {member.team && <p class="mt-0.5 text-[11px] font-medium text-navy-500">{member.team}</p>}
+  {member.affiliation && (
+    <p class="mt-0.5 text-[11px] leading-snug text-navy-500">{ja ? member.affiliation.ja : member.affiliation.en}</p>
+  )}
 
   {member.comment && (
-    <p class="mt-2 text-xs leading-relaxed text-navy-600">「{member.comment}」</p>
+    <p class="mt-2 text-xs leading-relaxed text-navy-600" lang={commentLang}>「{member.comment}」</p>
   )}
 
   {(member.mail || member.github || member.url) && (
     <div class="mt-3 flex items-center gap-2.5">
       {member.mail && (
-        <a href={`mailto:${member.mail}`} aria-label={`Email ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
+        <a href={`mailto:${member.mail}`} aria-label={ja ? `${member.name} にメール` : `Email ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
           <Icon name="mail" class="h-3.5 w-3.5" />
         </a>
       )}
       {member.github && (
-        <a href={member.github} target="_blank" rel="noopener" aria-label={`GitHub of ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
+        <a href={member.github} target="_blank" rel="noopener" aria-label={ja ? `${member.name} の GitHub` : `GitHub of ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
           <Icon name="github" class="h-3.5 w-3.5" />
         </a>
       )}
       {member.url && (
-        <a href={member.url} target="_blank" rel="noopener" aria-label={`Homepage of ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
+        <a href={member.url} target="_blank" rel="noopener" aria-label={ja ? `${member.name} のホームページ` : `Homepage of ${member.name}`} class="text-navy-400 transition-colors hover:text-coral-600">
           <Icon name="external" class="h-3.5 w-3.5" />
         </a>
       )}

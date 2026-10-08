@@ -6,6 +6,8 @@ export interface Member {
   /** Personal homepage, if the member keeps one. */
   url?: string;
   comment?: string;
+  /** Who a visiting member is, shown under the team in the page's language. */
+  affiliation?: { ja: string; en: string };
   photo?: string;
 }
 
@@ -65,9 +67,9 @@ export const masterStudents: Member[] = [
   { name: "Ryoya Matsuno", team: "Circuit", mail: "ryoya_matsuno@keio.jp", comment: "日進月歩" },
   { name: "Ryo Yoshida", team: "Sensing" },
   { name: "Xu Zhen", team: "Circuit", comment: "頑張れ！！！" },
-  { name: "Zihao Ding", team: "Sensor", comment: "少しずつ前に進みたい" },
-  { name: "Shion Horie", team: "Circuits", mail: "456shion@keio.jp", comment: "好奇心を忘れない" },
-  { name: "Ryu Sugawara", team: "Circuits", mail: "55sugawararyu@keio.jp", comment: "なにかしら頑張ろう" },
+  { name: "Zihao Ding", team: "Sensing", comment: "少しずつ前に進みたい" },
+  { name: "Shion Horie", team: "Circuit", mail: "456shion@keio.jp", comment: "好奇心を忘れない" },
+  { name: "Ryu Sugawara", team: "Circuit", mail: "55sugawararyu@keio.jp", comment: "なにかしら頑張ろう" },
   { name: "Marino Watanabe", team: "Sensing", mail: "watanabe_marino@keio.jp", comment: "頑張ります。" },
 ];
 
@@ -81,15 +83,15 @@ export const bachelorStudents: Member[] = [
 
 export const researchMembers: Member[] = [
   { name: "Takami Sato", team: "Security" },
-  { name: "Xinyu Li", team: "Circuits", comment: "Visiting Ph.D. Student from Nanjing University" },
-  { name: "Yan Yan", team: "Circuits", comment: "Visiting Master's Student from Southeast University" },
+  { name: "Xinyu Li", team: "Circuit", affiliation: { ja: "南京大学からの訪問博士課程学生", en: "Visiting Ph.D. student from Nanjing University" } },
+  { name: "Yan Yan", team: "Circuit", affiliation: { ja: "東南大学からの訪問修士課程学生", en: "Visiting master's student from Southeast University" } },
 ];
 
 export const staff: Member[] = [{ name: "Aki Fukushima", team: "Secretary" }];
 
 export const alumni: AlumniMember[] = [
   { name: "Yung-Chin (Jim) Chen", destination: "Ph.D. student at Princeton University", mail: "jim.chen.work@gmail.com", url: "https://chenyungchin.github.io/" },
-  { name: "Ryo Suzuki", destination: "Nissan Motors", mail: "suzuki.ryo@keio.jp", github: "https://github.com/suhd10" },
+  { name: "Ryo Suzuki", destination: "Nissan Motor", mail: "suzuki.ryo@keio.jp", github: "https://github.com/suhd10" },
   { name: "Rokuto Nagata", destination: "Daihen", mail: "nagatarokuto@keio.jp", github: "https://github.com/ngtroku" },
   { name: "Satomi Miyagi", destination: "Sony Semiconductor Solutions", mail: "stm-m22@keio.jp", github: "https://github.com/stm-m22" },
   { name: "Yuki Hayakawa", destination: "Sony", mail: "hykwyuk@keio.jp", github: "https://github.com/organic-nailer" },
