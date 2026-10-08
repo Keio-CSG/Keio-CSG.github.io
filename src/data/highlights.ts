@@ -48,7 +48,7 @@ export const whyCsg: Highlight[] = [
       ja: "GIZMODO、日経クロステック、IEEE Spectrum、Tech Xploreなど国内外のメディアに研究が取り上げられています。プレスリリースも積極的に行っています。",
       en: "Our research has been covered by GIZMODO, Nikkei xTECH, IEEE Spectrum, and Tech Xplore, in Japan and abroad. We actively issue press releases.",
     },
-    proof: { ja: "メディア掲載 15件以上", en: "15+ media features" },
+    proof: { ja: "メディア掲載 20件以上", en: "20+ media features" },
   },
   {
     icon: "book",

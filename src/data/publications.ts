@@ -676,14 +676,36 @@ export const sponsors: { ja: string; en: string }[] = [
   { ja: "TSMC", en: "TSMC" },
 ];
 
-export const mediaCoverage = [
-  { outlet: { ja: "自動運転ラボ", en: "Jidounten Lab" }, title: "慶応の学生ら、走行中の自動運転センサーを無効化　「脆弱性」を発見", date: "2025/03" },
+export interface MediaItem {
+  /** A plain string when the outlet's name is the same in both languages. */
+  outlet: string | { ja: string; en: string };
+  title: string;
+  /** "YYYY/MM", "YYYY" when only the year is known, or "" when unknown. */
+  date: string;
+  href?: string;
+}
+
+/** Newest first. Articles about the lab's work, not the press releases themselves. */
+export const mediaCoverage: MediaItem[] = [
+  { outlet: { ja: "日経テックフォーサイト", en: "Nikkei Tech Foresight" }, title: "1位は慶応義塾大学などのLiDAR 「基礎研究」26年6月ランキング", date: "2026/07", href: "https://www.nikkei.com/prime/tech-foresight/article/DGXZQOUC022GJ0S6A700C2000000" },
+  { outlet: { ja: "マイナビ TECH+", en: "Mynavi TECH+" }, title: "慶大、LiDARの敵「ゴースト」を除去する世界最大のデータとAIを開発", date: "2026/06", href: "https://news.mynavi.jp/techplus/article/20260603-4536251/" },
+  { outlet: { ja: "日経テックフォーサイト", en: "Nikkei Tech Foresight" }, title: "慶応義塾大学など、長距離対応LiDAR用マーカー 自動運転建機に", date: "2026/04", href: "https://www.nikkei.com/prime/tech-foresight/article/DGXZQOUC027OE0S6A400C2000000" },
+  { outlet: { ja: "自動運転ラボ", en: "Jidounten Lab" }, title: "慶応の学生ら、走行中の自動運転センサーを無効化　「脆弱性」を発見", date: "2025/03", href: "https://jidounten-lab.com/u_52936" },
+  { outlet: "OPTRONICS ONLINE", title: "慶大ら，走行中のLiDARシステムを長距離から無効化", date: "2025/03", href: "https://optronics-media.com/news/20250303/98132/" },
+  { outlet: "fabcross", title: "慶應大、自動運転向けセンサーの新たな脆弱性を発見", date: "2025/02", href: "https://fabcross.jp/news/2025/20250228_keio_uci_lidarsensorattackstudy.html" },
+  { outlet: { ja: "レスポンス", en: "Response" }, title: "自動運転車のLiDARセンサーに脆弱性、「長距離から無効化可能」慶応大学が発見", date: "2025/02", href: "https://response.jp/article/2025/02/27/392544.html" },
   { outlet: "GIZMODO", title: "自動運転車のセンサー、遠距離からの攻撃で無効化できちゃうかも", date: "2025/02" },
+  { outlet: "Science Japan", title: "Investigation into the vulnerabilities of automated LiDAR sensors — Defensive measures against spoofing required", date: "2024/06", href: "https://sj.jst.go.jp/news/202406/n0603-01j.html" },
   { outlet: { ja: "日経クロステック", en: "Nikkei xTECH" }, title: "AI推論の新半導体が続々、電力効率改善へ注目3選", date: "2024/03" },
-  { outlet: "Tech Xplore", title: "Autonomous vehicle technology vulnerable to road object spoofing and vanishing attacks", date: "2024/03" },
-  { outlet: "PC Watch", title: "ISSCC 2024の発表論文数から見る、日の丸半導体復活への兆し", date: "2024/02" },
-  { outlet: { ja: "日経クロステック", en: "Nikkei xTECH" }, title: "自動運転用LiDARに脆弱性、慶応大らがHFR攻撃で物体消失を確認", date: "2024/02" },
-  { outlet: "EE Times", title: "アナログCIM回路でCNNとTransformerの処理を実現", date: "2024/02" },
+  { outlet: "Tech Xplore", title: "Autonomous vehicle technology vulnerable to road object spoofing and vanishing attacks", date: "2024/03", href: "https://techxplore.com/news/2024-03-autonomous-vehicle-technology-vulnerable-road.html" },
+  { outlet: "PC Watch", title: "ISSCC 2024の発表論文数から見る、日の丸半導体復活への兆し", date: "2024/02", href: "https://pc.watch.impress.co.jp/docs/column/semicon/1569787.html" },
+  { outlet: { ja: "日経クロステック", en: "Nikkei xTECH" }, title: "自動運転用LiDARに脆弱性、慶応大らがHFR攻撃で物体消失を確認", date: "2024/02", href: "https://xtech.nikkei.com/atcl/nxt/news/24/00252/" },
+  { outlet: "EE Times Japan", title: "アナログCIM回路でCNNとTransformerの処理を実現", date: "2024/02", href: "https://eetimes.itmedia.co.jp/ee/articles/2402/27/news067.html" },
+  { outlet: { ja: "大学ジャーナルオンライン", en: "Univ. Journal Online" }, title: "自動運転用LiDARセンサーの網羅的セキュリティー調査、慶應義塾大学などが実施", date: "2024", href: "https://univ-journal.jp/242385/" },
+  { outlet: "Electro Optics", title: "Autonomous lidar can be spoofed into performing unsafe actions, study finds", date: "2024", href: "https://www.electrooptics.com/article/autonomous-lidar-can-be-spoofed-performing-unsafe-actions-study-finds" },
+  { outlet: "Tech Explorist", title: "Study finds security flaws in first- and next-gen LiDAR systems", date: "2024", href: "https://www.techexplorist.com/study-finds-security-flaws-first-next-gen-lidar-systems/81641/" },
+  { outlet: "Electronics For You", title: "Critical vulnerabilities in autonomous vehicle LiDAR systems", date: "2024", href: "https://www.electronicsforu.com/news/critical-vulnerabilities-in-autonomous-vehicle-lidar-systems" },
+  { outlet: { ja: "日経エレクトロニクス", en: "Nikkei Electronics" }, title: "東芝がLiDARに本気、真夏の太陽下で200mを誤差0.125%の計測可能なSoC", date: "2018/02" },
   { outlet: "IEEE Spectrum", title: "Toshiba's Light Sensor Paves the Way for Cheap Lidar", date: "" },
   { outlet: "Google AI Blog", title: "An International Scientific Challenge for the Diagnosis and Gleason Grading of Prostate Cancer", date: "" },
 ];
