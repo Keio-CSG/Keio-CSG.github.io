@@ -58,7 +58,7 @@ export const phdStudents: Member[] = [
   { name: "Kazuma Ikeda", team: "Sensing", mail: "kazu2080@keio.jp", github: "https://github.com/ike-kazu", comment: "とにかくやる" },
   { name: "Shimpei Ando", team: "Circuit", mail: "shimpeiando@keio.jp", github: "https://github.com/Shimpeiando", comment: "焦らずコツコツ" },
   { name: "Ozora Sako", team: "Sensing", mail: "sako.ozora@keio.jp", github: "https://github.com/ozorasann", comment: "経験を大切にする" },
-  { name: "Shota Nagai", team: "Sensing", mail: "n-shota@keio.jp", affiliation: { ja: "社会人博士（AWS）", en: "Working Ph.D. student (AWS)" } },
+  { name: "Shota Nagai", team: "Sensing", mail: "n-shota@keio.jp", affiliation: { ja: "社会人博士", en: "Working Ph.D. student" } },
 ];
 
 export const masterStudents: Member[] = [
