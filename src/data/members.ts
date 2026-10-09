@@ -58,6 +58,7 @@ export const phdStudents: Member[] = [
   { name: "Kazuma Ikeda", team: "Sensing", mail: "kazu2080@keio.jp", github: "https://github.com/ike-kazu", comment: "とにかくやる" },
   { name: "Shimpei Ando", team: "Circuit", mail: "shimpeiando@keio.jp", github: "https://github.com/Shimpeiando", comment: "焦らずコツコツ" },
   { name: "Ozora Sako", team: "Sensing", mail: "sako.ozora@keio.jp", github: "https://github.com/ozorasann", comment: "経験を大切にする" },
+  { name: "Shota Nagai", team: "Sensing", mail: "n-shota@keio.jp", affiliation: { ja: "社会人博士（AWS）", en: "Working Ph.D. student (AWS)" } },
 ];
 
 export const masterStudents: Member[] = [
@@ -96,6 +97,5 @@ export const alumni: AlumniMember[] = [
   { name: "Satomi Miyagi", destination: "Sony Semiconductor Solutions", mail: "stm-m22@keio.jp", github: "https://github.com/stm-m22" },
   { name: "Yuki Hayakawa", destination: "Sony", mail: "hykwyuk@keio.jp", github: "https://github.com/organic-nailer" },
   { name: "Fumiya Tanaka", destination: "Sansan", mail: "238t@keio.jp", github: "https://github.com/fummicc1" },
-  { name: "Shota Nagai", destination: "AWS", mail: "n-shota@keio.jp" },
   { name: "Yu Kitagawa", destination: "—", mail: "keioyukita104@keio.jp" },
 ];

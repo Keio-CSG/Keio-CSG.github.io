@@ -15,6 +15,7 @@ authors:
   - name: "R. Suzuki"
     me: true
   - name: "S. Nagai"
+    me: true
   - name: "O. Sako"
     me: true
   - name: "R. Nagata"
