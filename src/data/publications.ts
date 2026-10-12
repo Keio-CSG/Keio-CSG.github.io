@@ -17,6 +17,13 @@ export interface Publication {
 export const publications: Publication[] = [
   // ---- Journals: Computing ----
   {
+    authors: "Y. Yan, S. Cao, Y. Zhang, X. Si, K. Yoshioka",
+    title: "CARDS-MoE: A 3D Heterogeneous NPU–NMP Architecture with Cost-Aware Expert Routing and Dynamic Attention Scheduler for Edge MoE Inference",
+    venue: "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
+    year: 2026, type: "journal", category: "computing",
+    note: "Collaboration with Southeast University",
+  },
+  {
     authors: "W. Zhang, X. Li, S. Ando, Z. Xu, K. Yoshioka",
     title: "A 65-nm Compute-in-Read-Only-Memory Macro With Bidirectional Ternary Weight Storage and Sparsity-Aware Local Accumulation for 1.58-bit LLM Inference",
     venue: "IEEE Transactions on Circuits and Systems I: Regular Papers",

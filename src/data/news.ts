@@ -32,6 +32,7 @@ export const newsTagLabels: Record<NewsTag, { ja: string; en: string; cls: strin
 };
 
 export const news: NewsItem[] = [
+  { date: "2026-10", tag: "paper", ja: "訪問学生の Yan Yan さんの論文が、IEEE TVLSI に採択されました！🎉 エッジでの MoE 推論に向けた 3D ニアメモリ処理アーキテクチャの研究で、東南大学との共同研究です。", en: "Visiting student Yan Yan's paper on a 3D near-memory processing architecture for edge MoE inference was accepted to IEEE TVLSI! 🎉 A collaboration with Southeast University." },
   { date: "2026-09", tag: "paper", ja: "吉田くんと池田くんの研究が、機械学習のトップ学会 NeurIPS 2026 にそれぞれ採択されました🎉 池田くんの研究は五十川研究室との共同研究です。", en: "Two full-waveform LiDAR papers, by Ryo Yoshida and Kazuma Ikeda, were accepted to NeurIPS 2026! 🎉 One is a joint effort with the Isogawa Lab.", links: [{ label: "NeurIPS", href: "https://neurips.cc/" }] },
   { date: "2026-09", tag: "grant", ja: "JST-NSF VINES と JST CRONOS に、吉岡がCo-PIとして参画している提案がそれぞれ採択されました。", en: "Proposals to JST-NSF VINES and JST CRONOS, with Ken as Co-PI, were both accepted.", links: [{ label: "JST-NSF VINES", href: "https://www.keio.ac.jp/ja/press-release/20260917-press-01" }, { label: "JST CRONOS", href: "https://www.jst.go.jp/kisoken/cronos/dl/2026/press-01.pdf" }] },
   { date: "2026-09", tag: "award", ja: "松野くんがdlabデザインフォーラムで dlab-VDECデザインアワード優秀賞 を受賞しました！おめでとうございます🎉", en: "Ryoya Matsuno received the dlab-VDEC Design Award (Excellence Prize) at the dlab Design Forum! 🎉", links: [{ label: { ja: "受賞報告", en: "Announcement" }, href: "https://x.com/keiocsg/status/2099454587199738137" }] },
