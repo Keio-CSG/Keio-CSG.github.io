@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Generated project artwork: large PNGs, installed as webp under src/assets/projects/
 scripts/project-art/out/
+
+# Editor and coding-agent files: kept locally, not published
+.vscode/
+.claude/
+CLAUDE.md
+AGENTS.md
