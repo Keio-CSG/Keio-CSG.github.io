@@ -8,7 +8,7 @@ Website of the Computing and Sensing Group (Yoshioka Lab), Faculty of Science an
 
 ## 開発
 
-[Astro](https://astro.build/) と Tailwind CSS で作った静的サイトです。Node.js 22 以上で動きます。
+[Astro](https://astro.build/) と Tailwind CSS で作った静的サイトです。Node.js 22.12 以上で動きます。
 
 ```sh
 npm install
