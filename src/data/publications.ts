@@ -22,6 +22,7 @@ export const publications: Publication[] = [
     venue: "IEEE Transactions on Very Large Scale Integration (VLSI) Systems",
     year: 2026, type: "journal", category: "computing",
     note: "Collaboration with Southeast University",
+    links: [{ label: "Paper", href: "https://ieeexplore.ieee.org/document/11755734" }],
   },
   {
     authors: "W. Zhang, X. Li, S. Ando, Z. Xu, K. Yoshioka",
