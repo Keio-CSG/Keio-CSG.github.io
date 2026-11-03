@@ -27,7 +27,7 @@ tags:
   - LiDAR
   - Sports
 links:
-  project: https://sites.google.com/keio.jp/keio-csg/projects/basket-lidar
+  project: https://keio-csg.github.io/BasketLiDAR/
   code: https://github.com/Keio-CSG/BasketLiDAR
 ---
 

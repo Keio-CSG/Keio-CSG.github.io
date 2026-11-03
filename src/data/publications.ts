@@ -415,7 +415,7 @@ export const publications: Publication[] = [
     authors: "R. Hayashi, K. Torimi, R. Nagata, K. Ikeda, O. Sako, T. Nakamura, M. Tani, Y. Aoki, K. Yoshioka",
     title: "BasketLiDAR: The First LiDAR-Camera Multimodal Dataset for Professional Basketball MOT",
     venue: "MMSports", year: 2025, type: "conference", category: "sensing",
-    links: [{ label: "Project", href: "https://sites.google.com/keio.jp/keio-csg/projects/basket-lidar" }, { label: "GitHub", href: "https://github.com/Keio-CSG/BasketLiDAR" }],
+    links: [{ label: "Project", href: "https://keio-csg.github.io/BasketLiDAR/" }, { label: "GitHub", href: "https://github.com/Keio-CSG/BasketLiDAR" }],
   },
   {
     authors: "R. Yoshida, T. Sato, Y. Hayakawa, R. Suzuki, K. Ikeda, O. Sako, R. Nagata, K. Yoshioka",
