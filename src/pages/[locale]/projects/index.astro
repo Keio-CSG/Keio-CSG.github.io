@@ -50,6 +50,14 @@ const statusLabels: Record<string, { ja: string; en: string; cls: string }> = {
   preprint: { ja: "プレプリント", en: "Preprint", cls: "bg-sky-200/70 text-navy-700" },
 };
 
+/**
+ * A project with its own page on the lab's GitHub Pages (Ghost-FWL, PULSAR-Net, ...)
+ * sends "Read more" there. Links to the old Google Site don't count: the detail page
+ * here says more than those do.
+ */
+const projectPageOf = (links: Record<string, string | undefined>) =>
+  links.project?.startsWith("https://keio-csg.github.io/") ? links.project : undefined;
+
 const linkLabels: Record<string, string> = {
   paper: "Paper",
   arxiv: "arXiv",
@@ -167,12 +175,23 @@ const description = ja
                       {linkLabels[key] ?? key}
                     </a>
                   ))}
-                  <a
-                    href={`${base}/${locale}/projects/${p.id}`}
-                    class="ml-auto text-xs font-bold text-coral-600 hover:underline"
-                  >
-                    {s.common.readMore} →
-                  </a>
+                  {projectPageOf(p.data.links) ? (
+                    <a
+                      href={projectPageOf(p.data.links)}
+                      target="_blank"
+                      rel="noopener"
+                      class="ml-auto text-xs font-bold text-coral-600 hover:underline"
+                    >
+                      {s.common.readMore} ↗
+                    </a>
+                  ) : (
+                    <a
+                      href={`${base}/${locale}/projects/${p.id}`}
+                      class="ml-auto text-xs font-bold text-coral-600 hover:underline"
+                    >
+                      {s.common.readMore} →
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
