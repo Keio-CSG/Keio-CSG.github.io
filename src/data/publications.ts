@@ -360,7 +360,10 @@ export const publications: Publication[] = [
     title: "Towards Real-Time Full-Waveform LiDAR Transformers via Intensity-Guided Token Reduction and Physics-Aware Augmentation",
     venue: "NeurIPS", year: 2026, type: "conference", category: "sensing", accRate: "25%",
     note: "* co-first authors · Collaboration with Isogawa Group",
-    links: [{ label: "Project", href: "https://keio-csg.github.io/FWL-ToPM/" }],
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2611.07613" },
+      { label: "Project", href: "https://keio-csg.github.io/FWL-ToPM/" },
+    ],
   },
   {
     authors: "R. Yoshida, T. Sato, W. Zhang, Y. Hayakawa, S. Nagai, T. Kado, T. Beppu, K. Yoshioka",
