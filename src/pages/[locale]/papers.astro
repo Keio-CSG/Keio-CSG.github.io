@@ -10,6 +10,8 @@ import {
   mediaCoverage,
   patentsUrl,
   type Publication,
+  issccPaperCount,
+  jsscPaperCount,
 } from "../../data/publications";
 import { locales, type Locale } from "../../i18n/strings";
 
@@ -66,8 +68,8 @@ const description = ja
     eyebrow="Papers"
     title={ja ? "発表論文" : "Publications"}
     lead={ja
-      ? "集積回路のトップ会議ISSCCに5報、トップ論文誌JSSCに9報を含む計80報以上を発表。セキュリティ、AI、ロボティクス、医療画像解析のトップ会議でも成果を発表しています。特許も30件以上出願・登録しています。"
-      : "Over 80 papers, including 5 at ISSCC and 9 in JSSC — the top conference and journal in integrated circuits. We also publish at top venues in security, AI, robotics, and medical image analysis, and hold over 30 patents."}
+      ? `集積回路のトップ会議ISSCCに${issccPaperCount}報、トップ論文誌JSSCに${jsscPaperCount}報を含む計80報以上を発表。セキュリティ、AI、ロボティクス、医療画像解析のトップ会議でも成果を発表しています。特許も30件以上出願・登録しています。`
+      : `Over 80 papers, including ${issccPaperCount} at ISSCC and ${jsscPaperCount} in JSSC — the top conference and journal in integrated circuits. We also publish at top venues in security, AI, robotics, and medical image analysis, and hold over 30 patents.`}
   />
 
   <!-- Kind picks the sections shown; category and year then refine the papers. -->
