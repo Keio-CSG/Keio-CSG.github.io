@@ -9,7 +9,7 @@ import { researchThemes } from "../../data/research";
 import { news, newsTagLabels, linkLabel } from "../../data/news";
 import { whyCsg } from "../../data/highlights";
 import { categoryOf } from "../../data/projectCategories";
-import { topConferencePaperCount } from "../../data/publications";
+import { topConferencePaperCount, issccPaperCount, jsscPaperCount } from "../../data/publications";
 import { locales, t, type Locale } from "../../i18n/strings";
 import mainVisual from "../../assets/main.webp";
 import edgeVisual from "../../assets/edge.webp";
@@ -38,8 +38,8 @@ const venueHighlights = ["ISSCC", "NDSS", "CVPR", "NeurIPS", "ICCV", "IROS", "IC
 const stats = [
   { to: 80, suffix: "+", label: ja ? "発表論文" : "Publications" },
   { to: topConferencePaperCount, suffix: "", label: ja ? "トップ会議論文" : "Top-conference papers" },
-  { to: 9, suffix: "", label: ja ? "JSSC 論文" : "JSSC papers" },
-  { to: 5, suffix: "", label: ja ? "ISSCC 論文" : "ISSCC papers" },
+  { to: jsscPaperCount, suffix: "", label: ja ? "JSSC 論文" : "JSSC papers" },
+  { to: issccPaperCount, suffix: "", label: ja ? "ISSCC 論文" : "ISSCC papers" },
 ];
 
 const allProjects = await getCollection("projects");

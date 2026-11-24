@@ -347,6 +347,12 @@ export const publications: Publication[] = [
 
   // ---- International conferences: Sensing ----
   {
+    authors: "R. Nonaka*, R. Matsuno*, S. Nagai*, S. Miyagi*, Y. Hayakawa, R. Suzuki, M. Murakami, S. Ando, W. Zhang, T. Kado, K. Yoshioka",
+    title: "A 16-Channel Attack-Adaptive dToF LiDAR SoC with a 3.1mW/ch Event-Driven AFE and Time/Amplitude Dual-Domain Fingerprinting",
+    venue: "ISSCC", year: 2027, type: "conference", category: "sensing",
+    note: "* co-first authors · Collaboration with Sony",
+  },
+  {
     authors: "M. Watanabe, T. Sato, K. Yoshioka",
     title: "Lights, Camera, Malfunction: When Illumination Robustness Leaves VLA Models Blind to Color",
     venue: "CoRL", year: 2026, type: "conference", category: "sensing", accRate: "33%",
@@ -497,6 +503,12 @@ export const publications: Publication[] = [
 
   // ---- International conferences: Analog ----
   {
+    authors: "K. Yamashita, K. Yoshioka, V. Issakov, H. Ishikuro",
+    title: "A 4.2-to-373K 3GS/s 7b Time-Domain ADC with Gated-Ring-Oscillator-Based DEM",
+    venue: "ISSCC", year: 2027, type: "conference", category: "analog",
+    note: "Collaboration with TU Braunschweig",
+  },
+  {
     authors: "K. Yamashita, K. Yoshioka, C. Ziegler, V. Issakov, H. Ishikuro",
     title: "A 4.6-373K Functional 800MS/s 12b Buffer-then-Amplify Charge-Pump-Based Pipelined TI-SAR ADC with Integrated-Active-Hold Technique",
     venue: "IEEE CICC", year: 2025, type: "conference", category: "analog",
@@ -584,6 +596,12 @@ export const isTopConferencePaper = (p: Publication) => {
 };
 
 export const topConferencePaperCount = publications.filter(isTopConferencePaper).length;
+
+/** Counted from the data, so the homepage, Papers and Recruit stay current as papers are added. */
+export const issccPaperCount = publications.filter((p) => p.type === "conference" && p.venue.startsWith("ISSCC")).length;
+export const jsscPaperCount = publications.filter(
+  (p) => p.type === "journal" && p.venue.startsWith("IEEE Journal of Solid-State Circuits"),
+).length;
 
 export const awards: Award[] = [
   { date: "2026/9", title: "dlab-VDEC Design Award, Excellence Prize", venue: "dlab Design Forum" },

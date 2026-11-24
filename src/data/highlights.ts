@@ -1,5 +1,7 @@
 /** Recruiting-facing selling points: what a student actually gets by joining CSG. */
 
+import { issccPaperCount, jsscPaperCount } from "./publications";
+
 export interface Highlight {
   icon: string;
   title: { ja: string; en: string };
@@ -18,7 +20,7 @@ export const whyCsg: Highlight[] = [
       ja: "シミュレーションで終わりません。学生が設計した回路を実際に半導体プロセスで製造し、測定して論文にします。65nm・28nm・12nm FinFETでの試作実績があり、TSMCからの支援も受けています。",
       en: "Research doesn't stop at simulation. Circuits designed by students are fabricated in real semiconductor processes, measured, and published. We have tape-outs in 65nm, 28nm, and 12nm FinFET, supported by TSMC.",
     },
-    proof: { ja: "ISSCC 5報 / JSSC 9報", en: "5 ISSCC · 9 JSSC papers" },
+    proof: { ja: `ISSCC ${issccPaperCount}報 / JSSC ${jsscPaperCount}報`, en: `${issccPaperCount} ISSCC · ${jsscPaperCount} JSSC papers` },
   },
   {
     icon: "car",
